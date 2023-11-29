@@ -7,12 +7,10 @@ const config: Config = {
         "./app/**/*.{js,ts,jsx,tsx,mdx}",
     ],
     theme: {
-        theme: {
+        extend: {
             colors: {
                 aknoon: "#FDC828",
             },
-        },
-        extend: {
             animation: {
                 fadeIn: "fadeIn 0.3s normal forwards ease-in-out",
             },

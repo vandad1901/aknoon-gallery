@@ -1,12 +1,14 @@
 import React, { Fragment, useState } from "react";
 
+import Link from "next/link";
 import clsx from "clsx";
 
 type nameLink = [string, string];
 
+const decoCats: [nameLink, nameLink[]][] = [[["", ""], []]];
 const styleCats: [nameLink, nameLink[]][] = [
     [
-        ["اکسسوری", "accesories"],
+        ["زیورآلات", "accesories"],
         [
             ["گوشواره", "earings"],
             ["گردنبند", "necklace"],
@@ -15,6 +17,8 @@ const styleCats: [nameLink, nameLink[]][] = [
             ["دکمه سردست", "cufflinks"],
             ["النگو و دستبند", "bracelet"],
             ["آویز موبایل", "phone-charm"],
+            ["آویز ایردپاد", "airpor-charm"],
+            ["اکسسوری ساعت", "watch-accessory"],
         ],
     ],
     [["کفش", "shoe"], []],
@@ -22,9 +26,8 @@ const styleCats: [nameLink, nameLink[]][] = [
         ["لباس", "clothing"],
         [
             ["کراوات", "tie"],
-            ["دستمال گردن(مردانه و زنانه)", "neck-scarf"],
+            ["دستمال گردن", "neck-scarf"],
             ["پوشت", "handkerchief"],
-            ["ست کراوات و پوشت", "handkerchief-tie-set"],
             ["مانتو", "manteau"],
             ["کت", "coat"],
             ["پیراهن", "shirt"],
@@ -39,13 +42,16 @@ export default function Categories() {
     const [activeCat, setActiveCat] = useState(-1);
     const styleElems = styleCats.map((val, idx) => {
         return (
-            <a
+            <Link
                 href={val[0][1]}
                 key={idx}
-                className="w-full"
+                className={clsx(
+                    "w-full",
+                    activeCat == idx && "text-aknoon font-bold",
+                )}
                 onMouseEnter={() => setActiveCat(idx)}>
                 {val[0][0]}
-            </a>
+            </Link>
         );
     });
 
@@ -59,17 +65,18 @@ export default function Categories() {
     }
     return (
         <div className="righ-auto absolute left-auto top-[100%] w-[60vw] translate-x-[100vw] border-2 bg-white shadow-sm transition-all delay-200 hover:translate-x-0 peer-hover:translate-x-0 peer-hover:delay-0">
-            <div className="flex h-60 w-24 flex-col content-start justify-start gap-4 border-l-2 py-4 pr-4">
+            <div className="flex h-[13.5rem] w-24 flex-col content-start justify-start gap-4 border-l-2 p-4">
                 {styleElems}
                 {showSection && (
                     <section
-                        className={`animate-fadeIn absolute right-24 ml-auto grid grid-flow-col grid-cols-[200px_200px] grid-rows-6 gap-4 px-4 transition-all delay-200`}>
+                        className={`animate-fadeIn absolute right-24 top-0 ml-auto grid grid-flow-col grid-cols-[200px_200px] grid-rows-6 transition-all delay-200`}>
                         {currentStyle![1].map((val) => (
-                            <a
+                            <Link
                                 href={`artworks/${currentStyle[0][1]}/${val[1]}`}
-                                key={val[0]}>
+                                key={val[0]}
+                                className="h-full w-full p-2 transition-all hover:bg-gray-200">
                                 {val[0]}
-                            </a>
+                            </Link>
                         ))}
                     </section>
                 )}

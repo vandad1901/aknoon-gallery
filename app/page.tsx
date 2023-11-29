@@ -1,7 +1,11 @@
 export default function Home() {
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            hello world!
+        <main className="grid grid-cols-1 justify-items-center gap-1 pt-20">
+            <p>
+                <strong className="text-aknoon">اکنون </strong>
+                در دسترس نیستیم
+            </p>
+            <p> به زودی...</p>
         </main>
     );
 }
