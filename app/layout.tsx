@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import Header from "./components/Header";
+import Header from "./components/HeaderComponents/Header";
 import type { Metadata } from "next";
 import { Noto_Sans_Arabic } from "next/font/google";
 
