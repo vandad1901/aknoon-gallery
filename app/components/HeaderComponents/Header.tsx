@@ -7,11 +7,11 @@ import Image from "next/image";
 import NavigationItems from "./Navigation";
 import React from "react";
 import UserInfo from "./UserInfo";
-import aknoonLogo from "../../../public/logo-aknoon-gallery-cropped.png";
+import aknoonLogo from "../../../public/logo-aknoon-gallery.png";
 
 export default function Header() {
     return (
-        <header className="sticky top-0 shadow-md sm:shadow-none">
+        <header className="sticky top-0 shadow-md sm:shadow-none z-50">
             <div className="relative top-0 z-50 grid grid-cols-[9fr_1fr] items-center justify-between gap-3 bg-white p-3 sm:grid-cols-[112px_37%_1fr] sm:px-6 sm:py-4">
                 <div className="col-span-2 justify-self-center sm:col-span-1 sm:self-start">
                     <Image
