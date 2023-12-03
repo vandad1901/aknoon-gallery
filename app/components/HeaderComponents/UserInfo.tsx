@@ -1,25 +1,23 @@
 "use client";
 
-import { ChevronDownIcon, UserCircleIcon } from "@heroicons/react/24/outline";
+import {
+    ChevronDownIcon,
+    UserCircleIcon,
+    UserIcon,
+} from "@heroicons/react/24/outline";
 import React, { useState } from "react";
 
 import clsx from "clsx";
 
-type props = { className: string };
-
-export default function UserInfo({ className }: props) {
+export default function UserInfo() {
     const userName = "aknoongallery";
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <div
-            className={clsx(
-                "box-border grid max-w-[12rem] border-spacing-2 grid-cols-[2rem_1fr_1.5rem] items-center rounded-lg border-2 px-2 py-2",
-                className,
-            )}>
+        <div className="box-border grid sm:w-[12rem] border-spacing-2 grid-cols-[2rem_1.5rem] sm:grid-cols-[2rem_1fr_1.5rem] items-center rounded-lg border-2 px-2 py-1 sm:py-2">
             <UserCircleIcon className="h-8 w-8 stroke-[0.8]" />
             <p
                 dir="ltr"
-                className="overflow-hidden text-ellipsis whitespace-nowrap text-sm">
+                className="hidden overflow-hidden text-ellipsis whitespace-nowrap text-sm sm:block">
                 {userName}
             </p>
             <ChevronDownIcon
