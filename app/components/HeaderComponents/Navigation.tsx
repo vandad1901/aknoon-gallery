@@ -6,14 +6,27 @@ import {
     PhoneIcon,
     UserGroupIcon,
 } from "@heroicons/react/24/outline";
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+    NavigationMenuViewport,
+} from "@/components/ui/navigation-menu";
 import React, { useEffect, useState } from "react";
 
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import Categories from "./Categories";
 import Link from "next/link";
-import clsx from "clsx";
+import { cn } from "@/lib/utils";
+import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 
-const iconLinkCss =
-    "flex border-b-2 border-transparent hover:border-aknoon box-border pb-2 transition-all flex-row gap-2";
+const topTriggerStyle = cn(
+    navigationMenuTriggerStyle(),
+    "border-b-2 border-transparent p-2 hover:border-aknoon",
+);
 
 export default function NavigationItems() {
     const [scrollDir, setScrollDir] = useState("scrolling down");
@@ -48,28 +61,59 @@ export default function NavigationItems() {
     }, [scrollDir]);
 
     return (
-        <div
-            className={clsx(
-                "relative top-full z-10 box-border hidden w-full origin-top flex-row justify-center gap-5 bg-white px-3 text-sm shadow-md transition-all duration-300 sm:flex",
+        <NavigationMenu
+            className={cn(
+                "relative top-full z-10 hidden w-screen origin-top justify-center bg-white text-sm shadow-md transition-all duration-300 sm:block",
                 scrollDir == "down" && " -translate-y-full",
-            )}>
-            <Link href="/" className={iconLinkCss}>
-                <HomeIcon className="h-6 w-6" />
-                صفحه اصلی
-            </Link>
-            <Categories />
-            <Link href="artworks" className={iconLinkCss}>
-                <BuildingStorefrontIcon className="h-6 w-6" />
-                آثار
-            </Link>
-            <Link href="about" className={iconLinkCss}>
-                <UserGroupIcon className="h-6 w-6" />
-                درباره ما
-            </Link>
-            <Link href="contact" className={iconLinkCss}>
-                <PhoneIcon className="h-6 w-6" />
-                تماس با ما
-            </Link>
-        </div>
+            )}
+            dir="rtl">
+            <NavigationMenuList className="gap-5">
+                <NavigationMenuItem>
+                    <Link href="/" legacyBehavior passHref>
+                        <NavigationMenuLink className={topTriggerStyle}>
+                            <HomeIcon className="h-6 w-6" aria-hidden={true} />
+                            صفحه اصلی
+                        </NavigationMenuLink>
+                    </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                    <NavigationMenuTrigger className={topTriggerStyle}>
+                        <Bars3Icon className="h-6 w-6" aria-hidden={true} />
+                        دسته بندی
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent className="right-0">
+                        <Categories />
+                    </NavigationMenuContent>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                    <Link href="artworks" legacyBehavior passHref>
+                        <NavigationMenuLink className={topTriggerStyle}>
+                            <BuildingStorefrontIcon className="h-6 w-6" aria-hidden={true} />
+                            آثار
+                        </NavigationMenuLink>
+                    </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                    <Link href="about" legacyBehavior passHref>
+                        <NavigationMenuLink className={topTriggerStyle}>
+                            <UserGroupIcon className="h-6 w-6" aria-hidden={true} />
+                            درباره ما
+                        </NavigationMenuLink>
+                    </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                    <Link href="contact" legacyBehavior passHref>
+                        <NavigationMenuLink className={topTriggerStyle}>
+                            <PhoneIcon className="h-6 w-6" aria-hidden={true} />
+                            تماس با ما
+                        </NavigationMenuLink>
+                    </Link>
+                </NavigationMenuItem>
+            </NavigationMenuList>
+            <NavigationMenuViewport
+                dir="rtl"
+                className="left-0 right-0 top-full mx-auto box-content h-[13.5rem] w-[40rem] border-2 bg-white shadow-sm"
+            />
+        </NavigationMenu>
     );
 }

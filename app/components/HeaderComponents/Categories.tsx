@@ -1,8 +1,16 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { NavigationMenuContent, NavigationMenuSub } from "@radix-ui/react-navigation-menu";
+import {
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+    NavigationMenuViewport,
+    navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
 
-import { Bars3Icon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import clsx from "clsx";
+import React from "react";
+import { cn } from "@/lib/utils";
 
 type nameLink = [string, string];
 
@@ -40,89 +48,37 @@ const styleCats: [nameLink, nameLink[]][] = [
 ];
 
 export default function Categories() {
-    const [navOpen, setNavOpen] = useState(false);
-    const enableMenu = useCallback(() => setNavOpen(true), [setNavOpen]);
-    const ref = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (ref.current && !ref.current.contains(event.target as Node)) {
-                setNavOpen(false);
-            }
-        };
-
-        document.addEventListener("mousedown", handleClickOutside);
-
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [setNavOpen]);
-    const [activeCat, setActiveCat] = useState(-1);
-    const styleElems = styleCats.map((val, idx) => {
-        if (activeCat == idx) {
-            return (
-                <Link
-                    href={val[0][1]}
-                    key={idx}
-                    className="w-full py-2 font-bold text-aknoon">
-                    {val[0][0]}
-                </Link>
-            );
-        }
-        return (
-            <p
-                key={idx}
-                className="w-full py-2"
-                onMouseEnter={() => setActiveCat(idx)}>
+    const styleSubs = styleCats.map((val) => (
+        <NavigationMenuItem className="w-full" key={val[0][0]} value={val[0][0]}>
+            <NavigationMenuTrigger className="w-full py-2 pr-2 data-[state=open]:text-aknoon">
                 {val[0][0]}
-            </p>
-        );
-    });
-
-    let showSection: boolean = false;
-    let currentStyle: [nameLink, nameLink[]];
-    if (activeCat != -1) {
-        currentStyle = styleCats[activeCat];
-        if (currentStyle[1].length != 0) {
-            showSection = true;
-        }
-    }
-    const iconLinkCss =
-        "flex border-b-2 border-transparent hover:border-aknoon box-border pb-2 transition-all flex-row gap-2";
+            </NavigationMenuTrigger>
+            <NavigationMenuContent className="grid w-full grid-flow-col grid-cols-[200px_1fr] grid-rows-6 data-[motion^=from-]:animate-fadeIn">
+                {val[1].map((subVal) => (
+                    <Link
+                        className="w-full"
+                        key={subVal[0]}
+                        href={subVal[1]}
+                        legacyBehavior
+                        passHref>
+                        <NavigationMenuLink
+                            className={cn(
+                                navigationMenuTriggerStyle(),
+                                "w-full bg-transparent pr-2 text-center",
+                            )}>
+                            {subVal[0]}
+                        </NavigationMenuLink>
+                    </Link>
+                ))}
+            </NavigationMenuContent>
+        </NavigationMenuItem>
+    ));
     return (
-        <>
-            <p
-                className={iconLinkCss}
-                onMouseEnter={enableMenu}
-                onClick={enableMenu}>
-                <Bars3Icon className="h-6 w-6" />
-                دسته بندی
-            </p>
-            <div
-                ref={ref}
-                className={clsx(
-                    "absolute left-auto right-auto top-[100%] w-[60vw]  border-2 bg-white shadow-sm transition-all ",
-                    navOpen
-                        ? "translate-x-0 delay-0"
-                        : "translate-x-[100vw] delay-200",
-                )}>
-                <div className="flex h-[13.5rem] w-24 flex-col content-start justify-start border-l-2 px-4 pt-2">
-                    {styleElems}
-                    {showSection && (
-                        <section
-                            className={`absolute right-24 top-0 ml-auto grid animate-fadeIn grid-flow-col grid-cols-[200px_200px] grid-rows-6 transition-all delay-200`}>
-                            {currentStyle![1].map((val) => (
-                                <Link
-                                    href={`artworks/${currentStyle[0][1]}/${val[1]}`}
-                                    key={val[0]}
-                                    className="h-full w-full p-2 transition-all hover:bg-gray-200">
-                                    {val[0]}
-                                </Link>
-                            ))}
-                        </section>
-                    )}
-                </div>
-            </div>
-        </>
+        <NavigationMenuSub orientation="vertical" defaultValue={styleCats[0][0][0]}>
+            <NavigationMenuList className="h-[13.5rem] w-24 flex-col content-start justify-start justify-items-stretch border-l-2 pt-2">
+                {styleSubs}
+            </NavigationMenuList>
+            <NavigationMenuViewport className="right-24 top-0 h-[13.5rem] w-[34rem]" />
+        </NavigationMenuSub>
     );
 }
