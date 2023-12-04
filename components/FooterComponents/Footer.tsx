@@ -12,9 +12,7 @@ export default function Footer() {
             <div className="m-6 flex flex-col gap-2">
                 <address className="not-italic">
                     <MapPinIcon className="inline h-8 w-8" />
-                    <strong className="flex-grow sm:flex-grow-0">
-                        به زودی:{" "}
-                    </strong>
+                    <strong className="flex-grow sm:flex-grow-0">به زودی: </strong>
                     یوسف آباد، بین ۵۱ و ۵۳، مجتمع تجاری رز، طبقه همکف، واحد ۲۰
                 </address>
                 <div className="flex flex-row justify-between">
@@ -29,9 +27,7 @@ export default function Footer() {
                             href="https://www.instagram.com/aknoongallery.jewelry/"
                             className="grid grid-cols-[2rem_1fr] gap-1">
                             <Image alt="لوگوی اینستاگرام" src={InstaLogo} />
-                            <p className="m-[0.125rem]">
-                                aknoongallery.jewelry
-                            </p>
+                            <p className="m-[0.125rem]">aknoongallery.jewelry</p>
                         </Link>
                         <Link
                             href="https://www.instagram.com/aknoongallery.style/"
@@ -39,9 +35,7 @@ export default function Footer() {
                             <Image alt="لوگوی اینستاگرام" src={InstaLogo} />
                             <p className="m-[0.125rem]">aknoongallery.style</p>
                         </Link>
-                        <Link
-                            href="tel:02188068652"
-                            className="grid grid-cols-[2rem_1fr] gap-1">
+                        <Link href="tel:02188068652" className="grid grid-cols-[2rem_1fr] gap-1">
                             <Image alt="عکس یک تلفن" src={telephoneIcon} />
                             <p className="m-[0.125rem]">02188068652</p>
                         </Link>
