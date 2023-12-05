@@ -21,12 +21,7 @@ import { Bars3Icon } from "@heroicons/react/24/outline";
 import Categories from "./Categories";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
-
-const topTriggerStyle = cn(
-    navigationMenuTriggerStyle(),
-    "border-b-2 border-transparent p-2 hover:border-aknoon",
-);
+import { topTriggerStyle } from "@/config/site";
 
 export default function NavigationItems() {
     const [scrollDir, setScrollDir] = useState("scrolling down");
