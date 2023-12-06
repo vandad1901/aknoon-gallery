@@ -58,7 +58,7 @@ export default function NavigationItems() {
     return (
         <NavigationMenu
             className={cn(
-                "relative top-full z-10 hidden w-screen origin-top justify-center bg-white text-sm shadow-md transition-all duration-300 sm:block",
+                "relative top-full z-10 w-screen origin-top justify-center bg-white text-sm shadow-md transition-all duration-300",
                 scrollDir == "down" && " -translate-y-full",
             )}
             dir="rtl">

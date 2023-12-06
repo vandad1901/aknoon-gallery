@@ -9,11 +9,11 @@ export default function UserInfo() {
     const userName = "aknoongallery";
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <div className="box-border grid border-spacing-2 grid-cols-[2rem_1.5rem] items-center rounded-lg border-2 px-2 py-1 sm:w-[12rem] sm:grid-cols-[2rem_1fr_1.5rem] sm:py-2">
+        <div className="box-border grid border-spacing-2 items-center rounded-lg border-2 p-2 w-[12rem] grid-cols-[2rem_1fr_1.5rem]">
             <UserCircleIcon className="h-8 w-8 stroke-[0.8]" />
             <p
                 dir="ltr"
-                className="hidden overflow-hidden text-ellipsis whitespace-nowrap text-sm sm:block">
+                className="overflow-hidden text-ellipsis whitespace-nowrap text-sm">
                 {userName}
             </p>
             <ChevronDownIcon
