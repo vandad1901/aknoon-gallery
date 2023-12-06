@@ -37,8 +37,7 @@ const styleCats: [nameLink, nameLink[]][] = [
 export const categories = { styleCats: styleCats, decoCats: decoCats };
 export const siteConfig = {
     name: "گالری اکنون",
-    description:
-        "فروشگاه اینترنتی گالری اکنون، خرید و فروش صنایع دستی، لباس، اکسسوری، کیف و کفش هنرمندان ایرانی",
+    description: "فروشگاه اینترنتی گالری اکنون، فروش آثار هنری و کاربردی هنرمندان ایرانی",
     url: "https://aknoongallery.com",
     ogImage: "/og.png",
 };

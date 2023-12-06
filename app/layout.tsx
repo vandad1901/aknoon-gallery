@@ -16,7 +16,6 @@ export const metadata: Metadata = {
         template: `%s - ${siteConfig.name}`,
     },
     description: siteConfig.description,
-    keywords: [],
     openGraph: {
         type: "website",
         locale: "fa_IR",
