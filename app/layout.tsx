@@ -1,7 +1,7 @@
 import "./globals.css";
 
-import Footer from "./components/FooterComponents/Footer";
-import Header from "./components/HeaderComponents/Header";
+import Footer from "@/components/FooterComponents/Footer";
+import Header from "@/components/HeaderComponents/Header";
 import type { Metadata } from "next";
 import { Noto_Sans_Arabic } from "next/font/google";
 import clsx from "clsx";
@@ -18,7 +18,7 @@ type props = { children: React.ReactNode };
 export default function RootLayout({ children }: props) {
     return (
         <html lang="en" dir="rtl">
-            <body className={clsx(notoSansArabic.className, "flex flex-col min-h-screen")}>
+            <body className={clsx(notoSansArabic.className, "flex min-h-screen flex-col")}>
                 <Header></Header>
                 <div className="flex-grow">{children}</div>
                 <Footer />

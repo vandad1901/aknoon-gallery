@@ -1,13 +1,13 @@
 import Image from "next/image";
 import React from "react";
-import slider1 from "../../../public/slider-1.jpg";
-import slider2 from "../../../public/slider-2.jpg";
-import slider3 from "../../../public/slider-3.jpg";
+import slider1 from "@/public/slider-1.jpg";
+import slider2 from "@/public/slider-2.jpg";
+import slider3 from "@/public/slider-3.jpg";
 
 export default function ImageSlider() {
     return (
-        <div className="bg-aknoon h-[70vh] w-full overflow-hidden ">
-            <div className="animate-slideShow relative left-0 grid h-full w-[100vw] grid-cols-3 justify-items-center transition-all">
+        <div className="h-[70vh] w-full overflow-hidden bg-aknoon ">
+            <div className="relative left-0 grid h-full w-[100vw] animate-slideShow grid-cols-3 justify-items-center transition-all">
                 <Image
                     src={slider1}
                     alt="placeholder"
