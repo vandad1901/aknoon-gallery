@@ -1,6 +1,3 @@
-import { cn } from "@/lib/utils";
-import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
-
 type nameLink = [string, string];
 
 const decoCats: [nameLink, nameLink[]][] = [[["", ""], []]];
@@ -38,8 +35,10 @@ const styleCats: [nameLink, nameLink[]][] = [
 ];
 
 export const categories = { styleCats: styleCats, decoCats: decoCats };
-
-export const topTriggerStyle = cn(
-    navigationMenuTriggerStyle(),
-    "border-b-2 border-transparent p-2 hover:border-aknoon",
-);
+export const siteConfig = {
+    name: "گالری اکنون",
+    description:
+        "فروشگاه اینترنتی گالری اکنون، خرید و فروش صنایع دستی، لباس، اکسسوری، کیف و کفش هنرمندان ایرانی",
+    url: "https://aknoongallery.com",
+    ogImage: "/og.png",
+};

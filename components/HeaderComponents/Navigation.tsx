@@ -1,5 +1,7 @@
 "use client";
 
+import {} from "@/config/site";
+
 import {
     BuildingStorefrontIcon,
     HomeIcon,
@@ -14,6 +16,7 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
     NavigationMenuViewport,
+    topTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import React, { useEffect, useState } from "react";
 
@@ -21,7 +24,6 @@ import { Bars3Icon } from "@heroicons/react/24/outline";
 import Categories from "./Categories";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { topTriggerStyle } from "@/config/site";
 
 export default function NavigationItems() {
     const [scrollDir, setScrollDir] = useState("scrolling down");

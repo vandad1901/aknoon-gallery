@@ -35,6 +35,11 @@ const navigationMenuTriggerStyle = cva(
     "group gap-2 inline-flex items-center bg-background text-sm font-medium transition-colors hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none hover:bg-accent disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
 );
 
+export const topTriggerStyle = cn(
+    navigationMenuTriggerStyle(),
+    "border-b-2 border-transparent p-2 hover:border-aknoon",
+);
+
 const NavigationMenuTrigger = React.forwardRef<
     React.ElementRef<typeof NavigationMenuPrimitive.Trigger>,
     React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Trigger>
