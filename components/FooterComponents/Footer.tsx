@@ -16,7 +16,7 @@ export default function Footer() {
                     یوسف آباد، بین ۵۱ و ۵۳، مجتمع تجاری رز، طبقه همکف، واحد ۲۰
                 </address>
                 <div className="flex flex-row justify-between">
-                    <div className="grid grid-cols-1 font-sans sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-3">
+                    <div className="grid grid-cols-1 font-sans gap-y-1 sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-3">
                         <Link
                             href="https://www.instagram.com/aknoongallery/"
                             className="grid grid-cols-[2rem_1fr] gap-1">
@@ -62,7 +62,7 @@ export default function Footer() {
                             unoptimized={true}
                             referrerPolicy="origin"
                             src="https://trustseal.enamad.ir/logo.aspx?id=418623&Code=LyJryUNAUpR0wZlD711pJyOZ48W8bB9e"
-                            alt=""
+                            alt="نماد تجارت الکترونیکی"
                             className="my-auto cursor-pointer bg-transparent p-2"
                             id="LyJryUNAUpR0wZlD711pJyOZ48W8bB9e"
                             width={80}
