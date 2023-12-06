@@ -19,7 +19,6 @@ const styleCats: [nameLink, nameLink[]][] = [
             ["اکسسوری ساعت", "watch-accessory"],
         ],
     ],
-    [["کفش", "shoe"], []],
     [
         ["لباس", "clothing"],
         [
@@ -33,6 +32,8 @@ const styleCats: [nameLink, nameLink[]][] = [
             ["جلیقه", "jacket"],
         ],
     ],
+    [["کفش", "shoe"], []],
+
     [["کیف", "bag"], []],
 ];
 
