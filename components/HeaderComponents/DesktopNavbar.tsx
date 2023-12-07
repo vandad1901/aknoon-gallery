@@ -3,6 +3,7 @@ import { MagnifyingGlassIcon, ShoppingBagIcon } from "@heroicons/react/24/outlin
 import Image from "next/image";
 import NavigationItems from "./Navigation";
 import React from "react";
+import { Separator } from "@/components/ui/separator";
 import UserInfo from "./UserInfo";
 import aknoonLogo from "@/public/logo-aknoon-gallery.png";
 
@@ -33,7 +34,7 @@ export default function DesktopNavbar() {
                 </div>
                 <div className="grid grid-cols-[12rem_1fr_1.5rem] items-center justify-self-end">
                     <UserInfo />
-                    <i className="mx-3 h-6 w-[1px] bg-gray-300" />
+                    <Separator orientation="vertical" className="mx-3 h-6" />
                     <ShoppingBagIcon className="h-6 w-6" />
                 </div>
             </div>
