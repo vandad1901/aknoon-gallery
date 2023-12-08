@@ -1,6 +1,28 @@
 type nameLink = [string, string];
 
-const decoCats: [nameLink, nameLink[]][] = [[["", ""], []]];
+const decoCats: [nameLink, nameLink[]][] = [
+    [["تابلو", "tableau"], [["همه تابلو ها", "tableau"]]],
+    [["مجسمه", "sculpture"], [["همه مجسمه ها", "sculpture"]]],
+    [
+        ["حجم کابردی", "functional-volumetrics"],
+        [
+            ["زیرسیگاری", "ashtray"],
+            ["ساعت", "clock"],
+            ["لامپ", "lamp"],
+            ["شمعدان", "candle-holder"],
+            ["جاعودی", "incense-holder"],
+        ],
+    ],
+    [
+        ["ظروف", "tableware-and-utensils"],
+        [
+            ["کاسه", "bowl"],
+            ["بشقاب", "plate"],
+            ["ماگ", "mug"],
+            ["قاشق", "spoon"],
+        ],
+    ],
+];
 const styleCats: [nameLink, nameLink[]][] = [
     [
         ["زیورآلات", "accesories"],
@@ -29,9 +51,9 @@ const styleCats: [nameLink, nameLink[]][] = [
             ["جلیقه", "jacket"],
         ],
     ],
-    [["کفش", "shoe"], []],
+    [["کفش", "shoe"], [["همه کفش ها", "shoe"]]],
 
-    [["کیف", "bag"], []],
+    [["کیف", "bag"], [["همه کیف ها", "bag"]]],
 ];
 
 export const categories = { styleCats: styleCats, decoCats: decoCats };

@@ -78,14 +78,14 @@ const config: Config = {
                     "83%": { transform: "translate3d(-200vw, 0, 0)" },
                     "100%": { transform: "translate3d(-300vw, 0, 0)" },
                 },
-            },
-            "accordion-down": {
-                from: { height: 0 },
-                to: { height: "var(--radix-accordion-content-height)" },
-            },
-            "accordion-up": {
-                from: { height: "var(--radix-accordion-content-height)" },
-                to: { height: 0 },
+                "accordion-down": {
+                    from: { height: "0" },
+                    to: { height: "var(--radix-accordion-content-height)" },
+                },
+                "accordion-up": {
+                    from: { height: "var(--radix-accordion-content-height)" },
+                    to: { height: "0" },
+                },
             },
         },
     },

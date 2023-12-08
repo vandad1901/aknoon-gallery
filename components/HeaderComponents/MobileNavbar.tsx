@@ -1,6 +1,12 @@
 "use client";
 
 import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
     Bars3Icon,
     MagnifyingGlassIcon,
     ShoppingBagIcon,
@@ -13,6 +19,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "../ui/separator";
 import aknoonLogo from "@/public/logo-aknoon-gallery.png";
 import { categories } from "@/config/site";
 import { cn } from "@/lib/utils";
@@ -20,6 +27,27 @@ import { useRouter } from "next/navigation";
 
 export default function MobileNavbar() {
     const [open, setOpen] = useState(false);
+
+    const [styleAccord, decorAccords] = [categories.styleCats, categories.decoCats].map((cats) =>
+        cats.map((val) => (
+            <AccordionItem key={val[0][0]} value={val[0][0]}>
+                <AccordionTrigger className="w-full py-2 font-medium data-[state=open]:text-aknoon">
+                    {val[0][0]}
+                </AccordionTrigger>
+                <AccordionContent className="flex w-full flex-col gap-4">
+                    {val[1].map((item) => (
+                        <MobileLink
+                            key={item[1]}
+                            href={item[1]}
+                            onOpenChange={setOpen}
+                            className="text-muted-foreground">
+                            {item[0]}
+                        </MobileLink>
+                    ))}
+                </AccordionContent>
+            </AccordionItem>
+        )),
+    );
     return (
         <div className="flex w-full flex-row items-center justify-between gap-2 bg-background p-4 sm:hidden">
             <div className="flex flex-row gap-4">
@@ -36,9 +64,19 @@ export default function MobileNavbar() {
                         </Button>
                     </SheetTrigger>
 
-                    <SheetContent side="right" className="pt-10">
-                        <ScrollArea dir="rtl" className="h-full pb-4">
-                            <div className="flex flex-col space-y-3 pt-6">
+                    <SheetContent side="right" className="pl-2 pr-3 pt-14">
+                        <Link href="/" className="absolute right-3 top-3 h-8 w-[4.5rem]">
+                            <Image
+                                src={aknoonLogo}
+                                width={71}
+                                height={32}
+                                className="object-contain"
+                                alt="لوگوی گالری اکنون"
+                            />
+                        </Link>
+                        <Separator orientation="horizontal" />
+                        <ScrollArea dir="rtl" className="h-full w-full pb-5 pl-4">
+                            <div className="flex flex-col space-y-3 pt-4">
                                 <MobileLink
                                     href="artworks"
                                     onOpenChange={setOpen}
@@ -58,28 +96,13 @@ export default function MobileNavbar() {
                                     تماس با ما
                                 </MobileLink>
                                 <div className="flex flex-col space-y-2">
-                                    {categories.styleCats.map((item, index) => (
-                                        <div key={index} className="flex flex-col space-y-3 pt-6">
-                                            <MobileLink
-                                                href={item[0][1]}
-                                                onOpenChange={setOpen}
-                                                className="font-medium">
-                                                {item[0][0]}
-                                            </MobileLink>
-                                            {item[1].map((item) => (
-                                                <React.Fragment key={item[1]}>
-                                                    {
-                                                        <MobileLink
-                                                            href={item[1]}
-                                                            onOpenChange={setOpen}
-                                                            className="text-muted-foreground">
-                                                            {item[0]}
-                                                        </MobileLink>
-                                                    }
-                                                </React.Fragment>
-                                            ))}
-                                        </div>
-                                    ))}
+                                    <Accordion
+                                        type="single"
+                                        className="flex flex-col space-y-3 pt-6"
+                                        collapsible>
+                                        {decorAccords}
+                                        {styleAccord}
+                                    </Accordion>
                                 </div>
                             </div>
                         </ScrollArea>
@@ -98,27 +121,27 @@ export default function MobileNavbar() {
             <div className="flex justify-end gap-3">
                 <Button
                     variant="ghost"
-                    className="h-8 w-8 rounded-md border-2 p-1 text-base focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
+                    className="h-8 w-8 rounded-md border-2 p-1 focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
                     <MagnifyingGlassIcon
                         aria-hidden={true}
                         className="h-full w-full stroke-gray-600"
                     />
-                    <span className="sr-only">باز کردن منو</span>
+                    <span className="sr-only">جستجو در محصولات</span>
                 </Button>
                 <Button
                     variant="ghost"
-                    className="h-8 w-8 rounded-md border-2 p-1 text-base focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
+                    className="h-8 w-8 rounded-md border-2 p-1 focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
                     <UserIcon
                         aria-hidden={true}
                         className="h-full w-full stroke-gray-600 stroke-[1.3]"
                     />
-                    <span className="sr-only">باز کردن منو</span>
+                    <span className="sr-only">صفحه شخصی</span>
                 </Button>
                 <Button
                     variant="ghost"
-                    className="h-8 w-8 rounded-md border-2 p-1 text-base focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
+                    className="h-8 w-8 rounded-md border-2 p-1 focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
                     <ShoppingBagIcon aria-hidden={true} className="h-full w-full stroke-gray-600" />
-                    <span className="sr-only">باز کردن منو</span>
+                    <span className="sr-only">سبد خرید</span>
                 </Button>
             </div>
         </div>

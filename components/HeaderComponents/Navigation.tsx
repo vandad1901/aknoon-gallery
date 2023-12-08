@@ -60,7 +60,7 @@ export default function NavigationItems() {
     return (
         <NavigationMenu
             className={cn(
-                "relative top-full z-10 w-screen origin-top justify-center bg-white text-sm shadow-md transition-all duration-300",
+                "relative top-full z-10 w-full origin-top justify-center bg-white text-sm shadow-md transition-all duration-300",
                 scrollDir == "down" && " -translate-y-full",
             )}
             dir="rtl">
@@ -109,7 +109,7 @@ export default function NavigationItems() {
             </NavigationMenuList>
             <NavigationMenuViewport
                 dir="rtl"
-                className="left-0 right-0 top-full mx-auto box-content h-[13.5rem] w-[40rem] border-2 bg-white shadow-sm"
+                className="left-0 right-0 top-full mx-auto box-content h-80 w-[40rem] border-2 bg-white shadow-sm"
             />
         </NavigationMenu>
     );
