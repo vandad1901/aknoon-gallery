@@ -57,6 +57,33 @@ const styleCats: [nameLink, nameLink[]][] = [
 ];
 
 export const categories = { styleCats: styleCats, decoCats: decoCats };
+export const artworksFields = [
+    "sub_category",
+    "name",
+    "material",
+    "technique",
+    "style",
+    "form",
+    "size",
+    "color",
+    "stone_type",
+] as const;
+export const persianArtworksFields: { [K in (typeof artworksFields)[number]]: string } = {
+    sub_category: "زیر دسته",
+    name: "نام",
+    material: "جنس",
+    technique: "تکنیک",
+    style: "سبک",
+    form: "شکل",
+    size: "اندازه",
+    color: "رنگ",
+    stone_type: "نوع سنگ",
+};
+
+export type artworksPossibleValuesType = {
+    [K in (typeof artworksFields)[number]]: string[];
+};
+
 export const siteConfig = {
     name: "گالری اکنون",
     description: "فروشگاه اینترنتی گالری اکنون، فروش آثار هنری و کاربردی هنرمندان ایرانی",

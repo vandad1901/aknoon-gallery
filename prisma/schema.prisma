@@ -12,12 +12,12 @@ model artworks {
   category     artworks_category
   sub_category String             @db.VarChar(50)
   name         String?            @db.VarChar(50)
-  ID           String             @id @db.Char(10)
+  ID           String             @id @db.Char(11)
   sell_price   Decimal            @default(0.000000) @db.Decimal(20, 6)
   buy_price    Decimal            @default(0.000000) @db.Decimal(20, 6)
   inventory    Int                @default(0) @db.UnsignedSmallInt
   material     String?            @db.VarChar(50)
-  technic      String?            @db.VarChar(50)
+  technique    String?            @db.VarChar(50)
   style        String?            @db.VarChar(50)
   dimensions   String?            @db.VarChar(50)
   form         String?            @db.VarChar(50)
@@ -25,7 +25,7 @@ model artworks {
   color        String?            @db.VarChar(50)
   stone_type   String?            @db.VarChar(50)
   statement    String?            @db.VarChar(300)
-  sex          String?            @db.VarChar(300)
+  sex          artworks_sex?
   model        String?            @db.VarChar(50)
   created_at   DateTime           @default(now()) @db.DateTime(0)
   updated_at   DateTime           @default(now()) @db.DateTime(0)
@@ -52,4 +52,10 @@ enum artworks_location {
 enum artworks_category {
   style
   decor
+}
+
+enum artworks_sex {
+  F
+  U
+  M
 }
