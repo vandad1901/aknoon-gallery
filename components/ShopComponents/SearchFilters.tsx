@@ -112,7 +112,6 @@ export default function SearchFilters({ priceBounds, possibleValues }: props) {
                 </div>
                 <Slider
                     disabled={areInputsDisabled}
-                    className="disabled:cursor-wait disabled:blur-md data-[disabled]:bg-red-500"
                     defaultValue={priceBounds}
                     step={1}
                     minStepsBetweenThumbs={1}
