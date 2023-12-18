@@ -81,7 +81,7 @@ export default function SearchFilters({ priceBounds, possibleValues }: props) {
                         <>
                             <Input
                                 className="mb-2"
-                                type="email"
+                                type="search"
                                 icon={true}
                                 id={key}
                                 onChange={(e) => {
