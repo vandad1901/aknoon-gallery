@@ -4,7 +4,7 @@ import React from "react";
 
 export default function Header() {
     return (
-        <header className="sticky top-0 z-50 shadow-md sm:shadow-none">
+        <header className="sticky top-0 z-50">
             <MobileNavbar />
             <DesktopNavbar />
         </header>

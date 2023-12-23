@@ -6,7 +6,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { artworksPossibleValuesType, persianArtworksFields } from "@/config/site";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -14,6 +14,7 @@ import { Checkbox } from "../ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "../ui/scroll-area";
 import { Slider } from "@/components/ui/slider";
+import { createQueryString } from "@/lib/utils";
 
 type props = { priceBounds: number[]; possibleValues: artworksPossibleValuesType };
 
@@ -30,20 +31,6 @@ export default function SearchFilters({ priceBounds, possibleValues }: props) {
     useEffect(() => {
         setAreInputsDisabled(false);
     }, [searchParams]);
-    const createQueryString = useCallback(
-        (key: string, value: string, checked: boolean) => {
-            const params = new URLSearchParams(searchParams);
-            if (!checked && params.getAll(key).includes(value)) {
-                const updatedNames = params.getAll(key).filter((val) => val !== value);
-                params.delete(key);
-                updatedNames.forEach((val) => params.append(key, val));
-            } else if (checked) {
-                params.append(key, value);
-            }
-            return params.toString();
-        },
-        [searchParams],
-    );
 
     const fieldCheckboxes = (key: keyof artworksPossibleValuesType, possibleValues: string[]) =>
         possibleValues
@@ -57,7 +44,10 @@ export default function SearchFilters({ priceBounds, possibleValues }: props) {
                         onCheckedChange={(checked) => {
                             setAreInputsDisabled(true);
                             router.push(
-                                pathname + "?" + createQueryString(key, value, checked as boolean),
+                                pathname +
+                                    "?" +
+                                    createQueryString(key, value, checked as boolean, searchParams),
+                                { scroll: false },
                             );
                         }}
                         disabled={areInputsDisabled}
@@ -103,38 +93,36 @@ export default function SearchFilters({ priceBounds, possibleValues }: props) {
             </AccordionItem>
         );
 
-    return (
-        <div className="h-min w-1/5 rounded-xl border-2">
-            <div className="flex flex-col gap-2 px-4 pt-4">
-                <div className="flex flex-row justify-between">
-                    <p>{(bounds[1] * 1000).toLocaleString("fa-IR")}</p>
-                    <p>{(bounds[0] * 1000).toLocaleString("fa-IR")}</p>
-                </div>
-                <Slider
-                    disabled={areInputsDisabled}
-                    defaultValue={priceBounds}
-                    step={1}
-                    minStepsBetweenThumbs={1}
-                    min={priceBounds[0]}
-                    max={priceBounds[1]}
-                    onValueChange={setBounds}
-                    onValueCommit={(value) => {
-                        router.push(
-                            pathname +
-                                "?" +
-                                new URLSearchParams({ price: value.join("-") }).toString(),
-                        );
-                    }}
-                />
-                <Accordion
-                    className="[&>*:last-child]:border-0"
-                    type="multiple"
-                    defaultValue={Array.from(searchParams.keys())}>
-                    {Object.entries(possibleValues).map(([key, possibleValues]) =>
-                        accordionItems(key as keyof artworksPossibleValuesType, possibleValues),
-                    )}
-                </Accordion>
+    const filters = (
+        <div className="flex flex-col gap-2 pt-4 md:px-4">
+            <div className="flex flex-row justify-between">
+                <p>{(bounds[1] * 1000).toLocaleString("fa-IR")}</p>
+                <p>{(bounds[0] * 1000).toLocaleString("fa-IR")}</p>
             </div>
+            <Slider
+                disabled={areInputsDisabled}
+                defaultValue={priceBounds}
+                step={1}
+                minStepsBetweenThumbs={1}
+                min={priceBounds[0]}
+                max={priceBounds[1]}
+                onValueChange={setBounds}
+                onValueCommit={(value) => {
+                    router.push(
+                        pathname + "?" + new URLSearchParams({ price: value.join("-") }).toString(),
+                        { scroll: false },
+                    );
+                }}
+            />
+            <Accordion
+                className="[&>*:last-child]:border-0"
+                type="multiple"
+                defaultValue={Array.from(searchParams.keys())}>
+                {Object.entries(possibleValues).map(([key, possibleValues]) =>
+                    accordionItems(key as keyof artworksPossibleValuesType, possibleValues),
+                )}
+            </Accordion>
         </div>
     );
+    return filters;
 }

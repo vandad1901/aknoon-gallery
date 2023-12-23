@@ -1,12 +1,15 @@
+"use server";
+
 import { artworks as Artwork, Prisma } from "@prisma/client";
 import { artworksFields, artworksPossibleValuesType } from "@/config/site";
 
+import DesktopFilters from "@/components/ShopComponents/desktopFilters";
 import Image from "next/image";
+import MobileFilters from "@/components/ShopComponents/mobileFilters";
 import React from "react";
-import SearchFilters from "@/components/ShopComponents/SearchFilters";
+import SearchFilters from "@/components/ShopComponents/filtersChild";
 import placeholder from "@/public/artworksPlaceholder.svg";
 import prisma from "@/lib/db";
-import { time } from "console";
 
 type searchParamType = { [key: string]: string | string[] | undefined };
 type props = { searchParams: searchParamType };
@@ -15,21 +18,30 @@ export default async function Page({ searchParams }: props) {
     const artworks = await fetchArtworks(searchParams);
     const priceBounds = await fetchPriceBounds(searchParams);
     const possibleValues = await fetchPossibleValues(searchParams);
+
     return (
-        <div className="mx-4 my-4 flex flex-row gap-4">
-            <SearchFilters priceBounds={priceBounds} possibleValues={possibleValues} />
-            {artworks.length !== 0 ? (
-                <div className="grid w-full grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-4">
-                    {artworks.map((a) => (
-                        <ArtworkCard key={a.ID} artwork={a} />
-                    ))}
-                </div>
-            ) : (
-                <div className="flex w-full justify-center pt-10">
-                    <h1 className="text-xl">اثری با این مشخصات یافت نشد</h1>
-                </div>
-            )}
-        </div>
+        <>
+            <MobileFilters>
+                <SearchFilters priceBounds={priceBounds} possibleValues={possibleValues} />
+            </MobileFilters>
+
+            <div className="flex flex-row gap-4 md:mx-4 md:my-4 md:mt-4">
+                <DesktopFilters>
+                    <SearchFilters priceBounds={priceBounds} possibleValues={possibleValues} />
+                </DesktopFilters>
+                {artworks.length !== 0 ? (
+                    <div className="grid w-full grid-cols-2 sm:grid-cols-3 md:gap-2 xl:grid-cols-4">
+                        {artworks.map((a) => (
+                            <ArtworkCard key={a.ID} artwork={a} />
+                        ))}
+                    </div>
+                ) : (
+                    <div className="flex w-full justify-center pt-10">
+                        <h1 className="text-xl">اثری با این مشخصات یافت نشد</h1>
+                    </div>
+                )}
+            </div>
+        </>
     );
 }
 
@@ -37,12 +49,16 @@ type ArtworkCardProps = { artwork: Artwork };
 
 function ArtworkCard({ artwork }: ArtworkCardProps) {
     return (
-        <div className="flex aspect-square h-[22rem] w-full flex-col gap-2 rounded-xl border-2 p-2">
-            <div className="flex items-center justify-center">
-                <Image src={placeholder} alt="جاگیرنده مکان" className="h-64 w-64 object-contain" />
+        <div className="flex h-[14rem] w-full flex-col gap-2 border border-t-0 p-2 even:border-r-0 md:h-[22rem] md:rounded-xl md:!border-2 [&:nth-child(-n_+_2)]:border-t">
+            <div className="flex aspect-square items-center justify-center ">
+                <Image
+                    src={placeholder}
+                    alt="جاگیرنده مکان"
+                    className="h-32 w-32 object-contain md:h-64 md:w-64"
+                />
             </div>
             <div className="flex flex-grow flex-col justify-between">
-                <p>
+                <p className="line-clamp-2 text-sm md:text-base">
                     {artwork.name}
                     {artwork.model && ` - ${artwork.model}`}
                 </p>
