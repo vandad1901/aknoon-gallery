@@ -53,7 +53,7 @@ function ArtworkCard({ artwork }: ArtworkCardProps) {
             <div className="flex aspect-square items-center justify-center ">
                 <Image
                     src={placeholder}
-                    alt="جاگیرنده مکان"
+                    alt="جا گیرنده مکان"
                     className="h-32 w-32 object-contain md:h-64 md:w-64"
                 />
             </div>
