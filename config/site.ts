@@ -84,6 +84,14 @@ export type artworksPossibleValuesType = {
     [K in (typeof artworksFields)[number]]: string[];
 };
 
+export const sortFields = [
+    { name: "پرطرفدارترین", value: "popularity" },
+    { name: "جدیدترین", value: "newest" },
+    { name: "قدیمی ترین", value: "oldest" },
+    { name: "ارزان ترین", value: "cheapest" },
+    { name: "گران ترین", value: "most_expensive" },
+];
+
 export const siteConfig = {
     name: "گالری اکنون",
     description: "فروشگاه اینترنتی گالری اکنون، فروش آثار هنری و کاربردی هنرمندان ایرانی",

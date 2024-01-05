@@ -14,7 +14,7 @@ import { Checkbox } from "../ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "../ui/scroll-area";
 import { Slider } from "@/components/ui/slider";
-import { createQueryString } from "@/lib/utils";
+import { addQueryStringKV, UpdateQueryStringKV } from "@/lib/utils";
 
 type props = { priceBounds: number[]; possibleValues: artworksPossibleValuesType };
 
@@ -46,7 +46,7 @@ export default function SearchFilters({ priceBounds, possibleValues }: props) {
                             router.push(
                                 pathname +
                                     "?" +
-                                    createQueryString(key, value, checked as boolean, searchParams),
+                                    addQueryStringKV(key, value, checked as boolean, searchParams),
                                 { scroll: false },
                             );
                         }}
@@ -109,7 +109,9 @@ export default function SearchFilters({ priceBounds, possibleValues }: props) {
                 onValueChange={setBounds}
                 onValueCommit={(value) => {
                     router.push(
-                        pathname + "?" + new URLSearchParams({ price: value.join("-") }).toString(),
+                        pathname +
+                            "?" +
+                            UpdateQueryStringKV("price", value.join("-"), searchParams),
                         { scroll: false },
                     );
                 }}
