@@ -3,45 +3,46 @@
 import { artworks as Artwork, Prisma } from "@prisma/client";
 import { artworksFields, artworksPossibleValuesType } from "@/config/site";
 
-import DesktopFilters from "@/components/ShopComponents/desktopFilters";
+import ArtworksPagination from "@/components/ShopComponents/artworksPagination";
 import Image from "next/image";
-import MobileFilters from "@/components/ShopComponents/mobileFilters";
+import MainShopPage from "@/components/ShopComponents/mainShopPage";
 import React from "react";
-import SearchFilters from "@/components/ShopComponents/filtersChild";
+import { getPrismaWhereObject } from "@/lib/utils";
 import placeholder from "@/public/artworksPlaceholder.svg";
 import prisma from "@/lib/db";
+import type { searchParamType } from "@/lib/utils";
 
-type searchParamType = { [key: string]: string | string[] | undefined };
 type props = { searchParams: searchParamType };
 
 export default async function Page({ searchParams }: props) {
-    const artworks = await fetchArtworks(searchParams);
-    const priceBounds = await fetchPriceBounds(searchParams);
-    const possibleValues = await fetchPossibleValues(searchParams);
-
+    const [artworks, priceBounds, possibleValues, totalPages] = await Promise.all([
+        fetchArtworks(searchParams),
+        fetchPriceBounds(searchParams),
+        fetchPossibleValues(searchParams),
+        fetchPageInfo(searchParams),
+    ]);
+    const currentPage = Number(searchParams.page) || 1;
     return (
-        <>
-            <MobileFilters>
-                <SearchFilters priceBounds={priceBounds} possibleValues={possibleValues} />
-            </MobileFilters>
-
-            <div className="flex flex-row gap-4 md:mx-4 md:my-4 md:mt-4">
-                <DesktopFilters>
-                    <SearchFilters priceBounds={priceBounds} possibleValues={possibleValues} />
-                </DesktopFilters>
-                {artworks.length !== 0 ? (
-                    <div className="grid w-full grid-cols-2 sm:grid-cols-3 md:gap-2 xl:grid-cols-4">
-                        {artworks.map((a) => (
-                            <ArtworkCard key={a.ID} artwork={a} />
-                        ))}
+        <div className="flex flex-col items-center">
+            <MainShopPage priceBounds={priceBounds} possibleValues={possibleValues}>
+                <div className="flex flex-col gap-5">
+                    <div className="grid min-h-[14rem] w-full grid-cols-2 sm:grid-cols-3 md:min-h-[22rem] md:gap-2 xl:grid-cols-4">
+                        {artworks.length !== 0 ? (
+                            artworks.map((a) => <ArtworkCard key={a.ID} artwork={a} />)
+                        ) : (
+                            <div className="absolute top-10 flex justify-center">
+                                <h1 className="text-xl">اثری با این مشخصات یافت نشد</h1>
+                            </div>
+                        )}
                     </div>
-                ) : (
-                    <div className="flex w-full justify-center pt-10">
-                        <h1 className="text-xl">اثری با این مشخصات یافت نشد</h1>
-                    </div>
-                )}
-            </div>
-        </>
+                    <ArtworksPagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        searchParams={searchParams}
+                    />
+                </div>
+            </MainShopPage>
+        </div>
     );
 }
 
@@ -50,7 +51,7 @@ type ArtworkCardProps = { artwork: Artwork };
 function ArtworkCard({ artwork }: ArtworkCardProps) {
     return (
         <div className="flex h-[14rem] w-full flex-col gap-2 border border-t-0 p-2 even:border-r-0 md:h-[22rem] md:rounded-xl md:!border-2 [&:nth-child(-n_+_2)]:border-t">
-            <div className="flex aspect-square items-center justify-center ">
+            <div className="flex items-center justify-center ">
                 <Image
                     src={placeholder}
                     alt="جا گیرنده مکان"
@@ -71,12 +72,10 @@ function ArtworkCard({ artwork }: ArtworkCardProps) {
 }
 
 async function fetchArtworks(searchParams: searchParamType) {
-    const whereObject = Object.fromEntries(
-        artworksFields
-            .filter((val) => val != "sub_category" && searchParams[val] != null)
-            .map((field) => [field, { contains: searchParams[field]?.toString() || "" }]),
-    );
+    const whereObject = getPrismaWhereObject(searchParams);
     return await prisma.artworks.findMany({
+        take: 12,
+        skip: (Number(searchParams.page) - 1) * 12 || 0,
         where: {
             sell_price: {
                 gte: Number(searchParams.price?.toString().split("-")[0]) || 0,
@@ -113,4 +112,11 @@ async function fetchPriceBounds(searchParams: searchParamType) {
     const lowestPrice = priceBounds._min?.sell_price?.toNumber() || 0;
     const highestPrice = priceBounds._max?.sell_price?.toNumber() || 0;
     return [lowestPrice, highestPrice] as [number, number];
+}
+
+async function fetchPageInfo(searchParams: searchParamType) {
+    const whereObject = getPrismaWhereObject(searchParams);
+    const count = await prisma.artworks.count({ where: { ...whereObject } });
+    console.debug(count);
+    return count % 12 === 0 ? count / 12 : count / 12 + 1;
 }

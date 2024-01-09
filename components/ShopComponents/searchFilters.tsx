@@ -6,21 +6,30 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { ReadonlyToObject, UpdateQueryStringKV, addQueryStringKV } from "@/lib/utils";
 import { artworksPossibleValuesType, persianArtworksFields } from "@/config/site";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import { Checkbox } from "../ui/checkbox";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "../ui/scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Slider } from "@/components/ui/slider";
-import { addQueryStringKV, UpdateQueryStringKV } from "@/lib/utils";
 
-type props = { priceBounds: number[]; possibleValues: artworksPossibleValuesType };
+type props = {
+    priceBounds: number[];
+    possibleValues: artworksPossibleValuesType;
+    areInputsDisabled: boolean;
+    setAreInputsDisabled: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-export default function SearchFilters({ priceBounds, possibleValues }: props) {
+export default function SearchFilters({
+    priceBounds,
+    possibleValues,
+    areInputsDisabled,
+    setAreInputsDisabled,
+}: props) {
     const [bounds, setBounds] = useState(priceBounds);
-    const [areInputsDisabled, setAreInputsDisabled] = useState(false);
     const [currentSearchingField, setCurrentSearchingField] = useState<
         keyof artworksPossibleValuesType | null
     >(null);
@@ -28,9 +37,6 @@ export default function SearchFilters({ priceBounds, possibleValues }: props) {
     const router = useRouter();
     const searchParams = useSearchParams();
     const pathname = usePathname();
-    useEffect(() => {
-        setAreInputsDisabled(false);
-    }, [searchParams]);
 
     const fieldCheckboxes = (key: keyof artworksPossibleValuesType, possibleValues: string[]) =>
         possibleValues
@@ -46,7 +52,12 @@ export default function SearchFilters({ priceBounds, possibleValues }: props) {
                             router.push(
                                 pathname +
                                     "?" +
-                                    addQueryStringKV(key, value, checked as boolean, searchParams),
+                                    addQueryStringKV(
+                                        key,
+                                        value,
+                                        checked as boolean,
+                                        ReadonlyToObject(searchParams),
+                                    ),
                                 { scroll: false },
                             );
                         }}
@@ -111,7 +122,11 @@ export default function SearchFilters({ priceBounds, possibleValues }: props) {
                     router.push(
                         pathname +
                             "?" +
-                            UpdateQueryStringKV("price", value.join("-"), searchParams),
+                            UpdateQueryStringKV(
+                                "price",
+                                value.join("-"),
+                                ReadonlyToObject(searchParams),
+                            ),
                         { scroll: false },
                     );
                 }}

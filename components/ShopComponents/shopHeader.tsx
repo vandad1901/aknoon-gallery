@@ -1,21 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { sortFields } from "@/config/site";
+import { BarsArrowDownIcon, FunnelIcon } from "@heroicons/react/24/outline";
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuTrigger,
     DropdownMenuRadioGroup,
     DropdownMenuRadioItem,
+    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { FunnelIcon, BarsArrowDownIcon } from "@heroicons/react/24/outline";
-import { Button } from "../ui/button";
+import React, { useState } from "react";
+import { ReadonlyToObject, UpdateQueryStringKV } from "@/lib/utils";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { addQueryStringKV, UpdateQueryStringKV } from "@/lib/utils";
 
-export default function MobileFilters({ children }: { children: React.ReactNode }) {
+import { Button } from "../ui/button";
+import { sortFields } from "@/config/site";
+
+type props = {
+    children: React.ReactNode;
+    areInputsDisabled: boolean;
+    setAreInputsDisabled: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function ShopHeader({ children, areInputsDisabled, setAreInputsDisabled }: props) {
     const [open, setOpen] = useState(false);
 
     const router = useRouter();
@@ -36,7 +43,7 @@ export default function MobileFilters({ children }: { children: React.ReactNode 
                 <SheetContent>{children}</SheetContent>
             </Sheet>
             <DropdownMenu dir="rtl">
-                <DropdownMenuTrigger asChild>
+                <DropdownMenuTrigger asChild disabled={areInputsDisabled}>
                     <Button
                         variant="ghost"
                         className="mx-2 my-1 h-8 px-0 text-base focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
@@ -50,9 +57,16 @@ export default function MobileFilters({ children }: { children: React.ReactNode 
                         value={searchParams.get("sort") || sortFields[0].value}
                         onValueChange={(value) => {
                             router.push(
-                                pathname + "?" + UpdateQueryStringKV("sort", value, searchParams),
+                                pathname +
+                                    "?" +
+                                    UpdateQueryStringKV(
+                                        "sort",
+                                        value,
+                                        ReadonlyToObject(searchParams),
+                                    ),
                                 { scroll: false },
                             );
+                            setAreInputsDisabled(true);
                         }}>
                         {sortFields.map((field, index) => (
                             <DropdownMenuRadioItem key={field.name} value={field.value}>
