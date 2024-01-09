@@ -117,6 +117,5 @@ async function fetchPriceBounds(searchParams: searchParamType) {
 async function fetchPageInfo(searchParams: searchParamType) {
     const whereObject = getPrismaWhereObject(searchParams);
     const count = await prisma.artworks.count({ where: { ...whereObject } });
-    console.debug(count);
     return count % 12 === 0 ? count / 12 : count / 12 + 1;
 }
