@@ -26,7 +26,7 @@ export default async function Page({ searchParams }: props) {
         <div className="flex flex-col items-center">
             <MainShopPage priceBounds={priceBounds} possibleValues={possibleValues}>
                 <div className="flex flex-col gap-5">
-                    <div className="grid min-h-[14rem] w-full grid-cols-2 sm:grid-cols-3 md:min-h-[22rem] md:gap-2 xl:grid-cols-4">
+                    <div className="grid min-h-[14rem] w-full grid-cols-2 gap-[2px] sm:grid-cols-3 md:min-h-[22rem] md:gap-2 xl:grid-cols-4">
                         {artworks.length !== 0 ? (
                             artworks.map((a) => <ArtworkCard key={a.ID} artwork={a} />)
                         ) : (
@@ -50,7 +50,7 @@ type ArtworkCardProps = { artwork: Artwork };
 
 function ArtworkCard({ artwork }: ArtworkCardProps) {
     return (
-        <div className="flex h-[14rem] w-full flex-col gap-2 border border-t-0 p-2 even:border-r-0 md:h-[22rem] md:rounded-xl md:!border-2 [&:nth-child(-n_+_2)]:border-t">
+        <div className="flex h-[14rem] w-full flex-col gap-2 p-2 outline outline-2 outline-border md:h-[22rem] md:rounded-xl md:border-2 md:outline-0">
             <div className="flex items-center justify-center ">
                 <Image
                     src={placeholder}
