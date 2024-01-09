@@ -29,14 +29,17 @@ export default function SearchFilters({
     areInputsDisabled,
     setAreInputsDisabled,
 }: props) {
-    const [bounds, setBounds] = useState(priceBounds);
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const [bounds, setBounds] = useState([
+        Number(searchParams.get("price")?.split("-")[0]) || priceBounds[0],
+        Number(searchParams.get("price")?.split("-")[1]) || priceBounds[1],
+    ]);
     const [currentSearchingField, setCurrentSearchingField] = useState<
         keyof artworksPossibleValuesType | null
     >(null);
     const [searchText, setSearchText] = useState("");
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const pathname = usePathname();
 
     const fieldCheckboxes = (key: keyof artworksPossibleValuesType, possibleValues: string[]) =>
         possibleValues
@@ -103,7 +106,6 @@ export default function SearchFilters({
                 </AccordionContent>
             </AccordionItem>
         );
-
     const filters = (
         <div className="flex flex-col gap-2 pt-4 md:px-4">
             <div className="flex flex-row justify-between">
@@ -112,7 +114,7 @@ export default function SearchFilters({
             </div>
             <Slider
                 disabled={areInputsDisabled}
-                defaultValue={priceBounds}
+                defaultValue={bounds}
                 step={1}
                 minStepsBetweenThumbs={1}
                 min={priceBounds[0]}
