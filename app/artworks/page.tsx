@@ -59,7 +59,7 @@ function ArtworkCard({ artwork }: ArtworkCardProps) {
                 />
             </div>
             <div className="flex flex-grow flex-col justify-between">
-                <p className="line-clamp-2 text-sm md:text-base">
+                <p className="max-w-32 md:max-w-64 line-clamp-2 text-ellipsis text-sm md:text-base">
                     {artwork.name}
                     {artwork.model && ` - ${artwork.model}`}
                 </p>
