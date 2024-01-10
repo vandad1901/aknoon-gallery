@@ -25,9 +25,9 @@ export default async function Page({ searchParams }: props) {
     ]);
     const currentPage = Number(searchParams.page) || 1;
     return (
-        <div className="flexflex-col items-center">
+        <div className="flex w-full flex-col items-center md:w-auto">
             <MainShopPage priceBounds={priceBounds} possibleValues={possibleValues}>
-                <div className="relative flex flex-col gap-5">
+                <div className="relative flex w-full flex-col gap-5 md:w-auto">
                     {artworks.length === 0 && (
                         <div className="absolute right-1/2 top-10 z-10 flex translate-x-1/2 justify-center rounded-xl bg-white">
                             <h1 className="font-semi rounded-xl border-2 p-6 text-2xl">
