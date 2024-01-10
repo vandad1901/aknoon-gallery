@@ -9,28 +9,6 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
-export function addQueryStringKV(
-    key: string,
-    value: string,
-    checked: boolean,
-    searchParams: searchParamType,
-) {
-    const params = new URLSearchParams();
-    Object.entries(searchParams).forEach(([paramKey, paramValue]) => {
-        const paramValuesArray = Array.isArray(paramValue) ? paramValue : [paramValue];
-        paramValuesArray.forEach((val) => {
-            if (!(!checked && paramKey === key && value === val) && val) {
-                params.append(paramKey, val);
-            }
-        });
-    });
-    if (checked) {
-        params.append(key, value);
-    }
-
-    return sortParams(params).toString();
-}
-
 function sortParams(params: URLSearchParams) {
     const paramsArray: [string, string][] = Array.from(params.entries());
     paramsArray.sort((a, b) => {
@@ -43,11 +21,33 @@ function sortParams(params: URLSearchParams) {
     return new URLSearchParams(paramsArray);
 }
 
+export function addQueryStringKV(
+    key: string,
+    value: string,
+    checked: boolean,
+    searchParams: searchParamType,
+) {
+    const params = new URLSearchParams();
+    Object.entries(searchParams).forEach(([paramKey, paramValue]) => {
+        const paramValuesArray = Array.isArray(paramValue) ? paramValue : [paramValue];
+        paramValuesArray.forEach((val) => {
+            if (!(!checked && paramKey === key && value === val) && val && paramKey !== "page") {
+                params.append(paramKey, val);
+            }
+        });
+    });
+    if (checked) {
+        params.append(key, value);
+    }
+
+    return sortParams(params).toString();
+}
+
 export function UpdateQueryStringKV(key: string, value: string, searchParams: searchParamType) {
     const params = new URLSearchParams();
 
     Object.entries(searchParams).forEach(([paramKey, paramValue]) => {
-        if (paramKey !== key) {
+        if (paramKey !== key && paramKey !== "page") {
             if (Array.isArray(paramValue)) {
                 paramValue.forEach((val) => params.append(paramKey, val));
             } else if (paramValue != null) {
