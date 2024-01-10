@@ -104,13 +104,7 @@ async function fetchArtworks(searchParams: searchParamType) {
     return await prisma.artworks.findMany({
         take: 12,
         skip: (Number(searchParams.page) - 1) * 12 || 0,
-        where: {
-            sell_price: {
-                gte: Number(searchParams.price?.toString().split("-")[0]) || 0,
-                lte: Number(searchParams.price?.toString().split("-")[1]) || 99999999999999,
-            },
-            ...whereObject,
-        },
+        where: whereObject,
     });
 }
 
@@ -144,6 +138,6 @@ async function fetchPriceBounds(searchParams: searchParamType) {
 
 async function fetchPageInfo(searchParams: searchParamType) {
     const whereObject = getPrismaWhereObject(searchParams);
-    const count = await prisma.artworks.count({ where: { ...whereObject } });
-    return count % 12 === 0 ? count / 12 : count / 12 + 1;
+    const count = await prisma.artworks.count({ where: whereObject });
+    return Math.max(count % 12 === 0 ? count / 12 : count / 12 + 1, 1);
 }

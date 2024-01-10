@@ -60,12 +60,25 @@ export function UpdateQueryStringKV(key: string, value: string, searchParams: se
     return sortParams(params).toString();
 }
 
-export function getPrismaWhereObject(searchParams: searchParamType) {
-    return Object.fromEntries(
-        artworksFields
-            .filter((val) => val != "sub_category" && searchParams[val] != null)
-            .map((field) => [field, { contains: searchParams[field]?.toString() || "" }]),
-    );
+type whereType = {
+    [key: string]: {
+        contains?: string;
+        gte?: number;
+        lte?: number;
+    };
+};
+export function getPrismaWhereObject(searchParams: searchParamType): whereType {
+    return {
+        ...Object.fromEntries(
+            artworksFields
+                .filter((val) => val != "sub_category" && searchParams[val] != null)
+                .map((field) => [field, { contains: searchParams[field]?.toString() || "" }]),
+        ),
+        sell_price: {
+            gte: Number(searchParams.price?.toString().split("-")[0]) || 0,
+            lte: Number(searchParams.price?.toString().split("-")[1]) || 99999999999999,
+        },
+    };
 }
 
 export function ReadonlyToObject(searchParams: ReadonlyURLSearchParams) {
