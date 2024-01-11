@@ -30,7 +30,7 @@ export default async function Page({ searchParams }: props) {
                 <div className="relative flex flex-1 flex-col gap-5 md:w-auto">
                     {artworks.length === 0 && (
                         <div className="absolute right-1/2 top-10 z-10 flex translate-x-1/2 justify-center rounded-xl bg-white">
-                            <h1 className="font-semi rounded-xl border-2 p-6 text-2xl">
+                            <h1 className="font-semi w-max rounded-xl border-2 p-6 text-xl md:text-2xl">
                                 اثری با این مشخصات یافت نشد
                             </h1>
                         </div>
