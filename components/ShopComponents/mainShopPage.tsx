@@ -33,8 +33,8 @@ export default function MainShopPage({ children, priceBounds, possibleValues }: 
                 {filters}
             </ShopHeader>
 
-            <div className="flex w-full flex-row gap-4 md:mx-4 md:my-4 md:mt-4 md:w-auto">
-                <aside className="hidden h-min min-w-[16rem] rounded-xl border-2 md:block">
+            <div className="flex w-full flex-row gap-4 md:m-4 md:w-auto lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px]">
+                <aside className="hidden h-min w-[16rem] rounded-xl border-2 md:block">
                     {filters}
                 </aside>
                 {children}

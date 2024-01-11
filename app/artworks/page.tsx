@@ -27,7 +27,7 @@ export default async function Page({ searchParams }: props) {
     return (
         <div className="flex w-full flex-col items-center md:w-auto">
             <MainShopPage priceBounds={priceBounds} possibleValues={possibleValues}>
-                <div className="relative flex w-full flex-col gap-5 md:w-auto">
+                <div className="relative flex flex-1 flex-col gap-5 md:w-auto">
                     {artworks.length === 0 && (
                         <div className="absolute right-1/2 top-10 z-10 flex translate-x-1/2 justify-center rounded-xl bg-white">
                             <h1 className="font-semi rounded-xl border-2 p-6 text-2xl">
@@ -71,7 +71,7 @@ function ArtworkCard({ artwork }: ArtworkCardProps) {
                 />
             </div>
             <div className="flex flex-grow flex-col justify-between">
-                <p className="max-w-32 md:max-w-64 line-clamp-2 text-ellipsis text-sm md:text-base">
+                <p className="line-clamp-2 max-w-full text-ellipsis text-sm md:text-base">
                     {artwork.name}
                     {artwork.model && ` - ${artwork.model}`}
                 </p>
