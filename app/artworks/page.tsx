@@ -92,7 +92,7 @@ function ArtworkCardSkeleton() {
                 </div>
             </div>
             <div className="flex flex-grow flex-col justify-between">
-                <Skeleton className="h-5 w-full rounded-lg"></Skeleton>
+                <Skeleton className="h-5 w-3/4 rounded-lg"></Skeleton>
                 <Skeleton className="h-5 w-2/5 rounded-lg"></Skeleton>
             </div>
         </div>
