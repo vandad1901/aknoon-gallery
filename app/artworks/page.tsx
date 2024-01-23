@@ -1,8 +1,8 @@
 "use server";
 
-import { artworks as Artwork, Prisma } from "@prisma/client";
 import { artworksFields, artworksPossibleValuesType } from "@/config/site";
 
+import { artworks as Artwork } from "@prisma/client";
 import ArtworksPagination from "@/components/ShopComponents/artworksPagination";
 import Image from "next/image";
 import MainShopPage from "@/components/ShopComponents/mainShopPage";
@@ -109,22 +109,22 @@ async function fetchArtworks(searchParams: searchParamType) {
 }
 
 async function fetchPossibleValues(searchParams?: searchParamType) {
-    const possibleValues: artworksPossibleValuesType = Object.fromEntries(
-        await Promise.all(
-            artworksFields.map(async (field) => {
-                const distinctValues = await prisma.artworks.findMany({
-                    distinct: [field],
-                    select: { [field]: true } as Prisma.artworksSelect,
-                });
-                const values = distinctValues
-                    .map((v) => v[field])
-                    .filter((v) => v != null)
-                    .flatMap((v) => v!.split("،"));
-                return [field, Array.from(new Set(values)).sort((a, b) => a.localeCompare(b))];
-            }),
+    const valuesArray = await prisma.$transaction(
+        artworksFields.map((field) =>
+            prisma.artworks.findMany({ distinct: [field], select: { [field]: true } }),
         ),
     );
-    return possibleValues;
+    const possibleValues = Object.fromEntries(
+        artworksFields.map((field, index) => {
+            const distinctValues = valuesArray[index] as { [field: string]: string }[];
+            const values = distinctValues
+                .map((v) => v[field])
+                .filter((v) => v != null)
+                .flatMap((v) => v.split("،"));
+            return [field, Array.from(new Set(values)).sort((a, b) => a.localeCompare(b))];
+        }),
+    );
+    return possibleValues as artworksPossibleValuesType;
 }
 async function fetchPriceBounds(searchParams: searchParamType) {
     const priceBounds = await prisma.artworks.aggregate({
