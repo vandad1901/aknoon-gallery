@@ -31,6 +31,7 @@ model artworks {
   updated_at   DateTime           @default(now())
   artist       String             @db.VarChar(50)
   location     artworks_location? @default(IR)
+  images       String[]           @db.VarChar(50)
 }
 
 model users {
