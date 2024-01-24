@@ -9,7 +9,7 @@ import aknoonLogo from "@/public/logo-aknoon-gallery.png";
 
 export default function DesktopNavbar() {
     return (
-        <div className="hidden sm:block">
+        <div className="hidden shadow-md sm:block sm:shadow-none">
             <div className="relative top-0 z-50 grid grid-cols-[112px_37%_1fr] items-center justify-between gap-3 bg-white px-6 py-4">
                 <div className="col-span-1 self-start justify-self-center">
                     <Image

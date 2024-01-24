@@ -39,8 +39,12 @@ type props = { children: React.ReactNode };
 export default function RootLayout({ children }: props) {
     return (
         <html lang="en" dir="rtl">
-            <body className={clsx(notoSansArabic.className, "flex min-h-screen flex-col")}>
-                <Header></Header>
+            <body
+                className={clsx(
+                    notoSansArabic.className,
+                    "flex min-h-screen flex-col overflow-y-scroll",
+                )}>
+                <Header />
                 <div className="flex-grow">{children}</div>
                 <Footer />
             </body>

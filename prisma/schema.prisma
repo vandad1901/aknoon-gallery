@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "postgres"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model artworks {
+  category     artworks_category
+  sub_category String             @db.VarChar(50)
+  name         String?            @db.VarChar(50)
+  ID           String             @id @db.Char(11)
+  sell_price   Decimal            @default(0.000000) @db.Decimal(20, 6)
+  buy_price    Decimal            @default(0.000000) @db.Decimal(20, 6)
+  inventory    Int                @default(0)
+  material     String?            @db.VarChar(50)
+  technique    String?            @db.VarChar(50)
+  style        String?            @db.VarChar(50)
+  dimensions   String?            @db.VarChar(50)
+  form         String?            @db.VarChar(50)
+  size         String?            @db.VarChar(50)
+  color        String?            @db.VarChar(50)
+  stone_type   String?            @db.VarChar(50)
+  statement    String?            @db.VarChar(300)
+  sex          artworks_sex?
+  model        String?            @db.VarChar(50)
+  created_at   DateTime           @default(now())
+  updated_at   DateTime           @default(now())
+  artist       String             @db.VarChar(50)
+  location     artworks_location? @default(IR)
+  images       String[]           @db.VarChar(50)
+}
+
+model users {
+  id         Int       @id
+  username   String    @db.VarChar(50)
+  passhash   String    @db.VarChar(50)
+  email      String    @db.VarChar(50)
+  sheba      String?   @db.Char(24)
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+  percentage Decimal   @default(35.000) @db.Decimal(6, 3)
+}
+
+enum artworks_location {
+  IR
+  CA
+}
+
+enum artworks_category {
+  style
+  decor
+}
+
+enum artworks_sex {
+  F
+  U
+  M
+}

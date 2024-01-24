@@ -49,7 +49,7 @@ export default function MobileNavbar() {
         )),
     );
     return (
-        <div className="flex w-full flex-row items-center justify-between gap-2 bg-background p-4 sm:hidden">
+        <div className="flex w-full flex-row items-center justify-between gap-2 border-b bg-background p-4 sm:hidden">
             <div className="flex flex-row gap-4">
                 <Sheet open={open} onOpenChange={setOpen}>
                     <SheetTrigger asChild>
