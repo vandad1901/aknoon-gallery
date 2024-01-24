@@ -22,7 +22,7 @@ export default async function Page({ searchParams }: props) {
         fetchPriceBounds(searchParams),
         fetchPossibleValues(searchParams),
         fetchPageInfo(searchParams),
-    ]);
+    ]); // TODO: Make it use the sort parameter
     const currentPage = Number(searchParams.page) || 1;
     return (
         <div className="flex w-full flex-col items-center md:w-auto">

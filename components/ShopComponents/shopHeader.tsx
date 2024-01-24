@@ -43,6 +43,9 @@ export default function ShopHeader({ children, areInputsDisabled, setAreInputsDi
                 <SheetContent>{children}</SheetContent>
             </Sheet>
             <DropdownMenu dir="rtl">
+                {
+                    // TODO: Make it show up on desktop too
+                }
                 <DropdownMenuTrigger asChild disabled={areInputsDisabled}>
                     <Button
                         variant="ghost"
