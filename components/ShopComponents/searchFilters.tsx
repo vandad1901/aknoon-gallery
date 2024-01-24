@@ -121,6 +121,7 @@ export default function SearchFilters({
                 max={priceBounds[1]}
                 onValueChange={setBounds}
                 onValueCommit={(value) => {
+                    setAreInputsDisabled(true);
                     router.push(
                         pathname +
                             "?" +
