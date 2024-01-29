@@ -32,7 +32,7 @@ export default function DesktopNavbar() {
                         />
                     </form>
                 </div>
-                <div className="grid grid-cols-[12rem_1fr_1.5rem] items-center justify-self-end">
+                <div className="flex flex-row items-center justify-self-end">
                     <UserInfo />
                     <Separator orientation="vertical" className="mx-3 h-6" />
                     <ShoppingBagIcon className="h-6 w-6" />
