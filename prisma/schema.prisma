@@ -35,14 +35,15 @@ model artworks {
 }
 
 model users {
-  id         Int       @id
-  username   String    @db.VarChar(50)
-  passhash   String    @db.VarChar(50)
-  email      String    @db.VarChar(50)
-  sheba      String?   @db.Char(24)
-  created_at DateTime? @default(now())
-  updated_at DateTime? @default(now())
-  percentage Decimal   @default(35.000) @db.Decimal(6, 3)
+  email         String    @id @db.VarChar(50)
+  password_hash String    @db.Char(128)
+  password_salt String    @db.Char(32)
+  first_name    String?   @db.VarChar(50)
+  last_name     String?   @db.VarChar(50)
+  sheba         String?   @db.Char(24)
+  created_at    DateTime  @default(now())
+  updated_at    DateTime? @default(now())
+  percentage    Decimal   @default(35.000) @db.Decimal(6, 3)
 }
 
 enum artworks_location {

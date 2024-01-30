@@ -14,8 +14,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import prisma from "@/lib/db";
+import { emailExists } from "@/lib/dbUtils";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const formSchema = z
@@ -41,6 +42,7 @@ const formSchema = z
     });
 
 export default function SignUp() {
+    const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -51,7 +53,16 @@ export default function SignUp() {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values);
+        if (await emailExists(values.email)) {
+            form.setError("email", {
+                type: "manual",
+                message: "ایمیل وارد شده قبلا ثبت شده است",
+            });
+            return;
+        }
+        // const user = registerUser(values.email, values.password);
+        // console.log(user);
+        router.push("/");
     }
     return (
         <div className="m-10 flex justify-center">
