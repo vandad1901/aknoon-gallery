@@ -1,13 +1,19 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'trustseal.enamad.ir',
-        port: '',
-        pathname: '/**',
-      },
-    ],
-  },}
+const nextConfig = {
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "trustseal.enamad.ir",
+                port: "",
+                pathname: "/**",
+            },
+        ],
+    },
+    webpack: (config) => {
+        config.externals.push("@node-rs/argon2", "@node-rs/bcrypt");
+        return config;
+    },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

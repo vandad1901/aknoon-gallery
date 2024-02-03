@@ -10,13 +10,12 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
+import { authSignUp, emailExists } from "@/lib/authServices";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { emailExists } from "@/lib/dbUtils";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const formSchema = z
@@ -27,13 +26,10 @@ const formSchema = z
             .email({ message: "ایمیل نامعتبر" }),
         password: z
             .string()
-            .min(10, { message: "رمز عبور باید حداقل ۱۰ کاراکتر باشد" })
-            .max(64, { message: "رمز عبور حداکثر ۵۰ حرف می‌تواند باشد" })
+            .min(8, { message: "رمز عبور باید حداقل ۸ کاراکتر باشد" })
+            .max(64, { message: "رمز عبور حداکثر ۶۴ حرف می‌تواند باشد" })
             .regex(/[a-z]/, { message: "رمز عبور باید شامل حداقل یک حرف کوچک باشد" })
-            .regex(/[0-9]/, { message: "رمز عبور باید شامل حداقل یک عدد باشد" })
-            .regex(/[A-Z@$!%*#?&+\-_=^()]/, {
-                message: "رمز عبور باید شامل حداقل یک حرف بزرگ و یا یک کاراکتر خاص باشد",
-            }),
+            .regex(/[0-9]/, { message: "رمز عبور باید شامل حداقل یک عدد باشد" }),
         confirmPassword: z.string(),
     })
     .refine(({ password, confirmPassword }) => password === confirmPassword, {
@@ -42,7 +38,6 @@ const formSchema = z
     });
 
 export default function SignUp() {
-    const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -60,9 +55,7 @@ export default function SignUp() {
             });
             return;
         }
-        // const user = registerUser(values.email, values.password);
-        // console.log(user);
-        router.push("/");
+        return authSignUp(values.email, values.password);
     }
     return (
         <div className="m-10 flex justify-center">

@@ -14,8 +14,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { authLogin } from "@/lib/authServices";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const formSchema = z.object({
@@ -25,17 +25,13 @@ const formSchema = z.object({
         .email({ message: "ایمیل نامعتبر" }),
     password: z
         .string()
-        .min(10, { message: "یادآوری: رمز عبور باید حداقل ۱۰ کاراکتر باشد" })
-        .max(64, { message: "یادآوری: رمز عبور حداکثر ۵۰ حرف می‌تواند باشد" })
+        .min(8, { message: "یادآوری: رمز عبور باید حداقل ۸ کاراکتر باشد" })
+        .max(64, { message: "یادآوری: رمز عبور حداکثر ۶۴ حرف می‌تواند باشد" })
         .regex(/[a-z]/, { message: "یادآوری: رمز عبور باید شامل حداقل یک حرف کوچک باشد" })
-        .regex(/[0-9]/, { message: "یادآوری« رمز عبور باید شامل حداقل یک عدد باشد" })
-        .regex(/[A-Z@$!%*#?&+\-_=^()]/, {
-            message: "یادآوری: رمز عبور باید شامل حداقل یک حرف بزرگ و یا یک کاراکتر خاص باشد",
-        }),
+        .regex(/[0-9]/, { message: "یادآوری: رمز عبور باید شامل حداقل یک عدد باشد" }),
 });
 
 export default function Login() {
-    const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -44,9 +40,14 @@ export default function Login() {
         },
     });
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values);
-        router.push("/");
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        const result = await authLogin(values.email, values.password);
+        if (result && result.error) {
+            form.setError("root", {
+                type: "manual",
+                message: result.error,
+            });
+        }
     }
     return (
         <div className="m-10 flex justify-center">
@@ -60,7 +61,7 @@ export default function Login() {
                                 <FormItem>
                                     <FormLabel>ایمیل</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="" dir="ltr" {...field} />
+                                        <Input dir="ltr" type="email" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -78,7 +79,7 @@ export default function Login() {
                                         </Link>
                                     </FormLabel>
                                     <FormControl>
-                                        <Input placeholder="" dir="ltr" {...field} />
+                                        <Input dir="ltr" type="password" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
