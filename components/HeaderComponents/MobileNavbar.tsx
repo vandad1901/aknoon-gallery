@@ -21,11 +21,14 @@ import Image from "next/image";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "../ui/separator";
 import aknoonLogo from "@/public/logo-aknoon-gallery.png";
+import type { authResultType } from "@/lib/authServices";
 import { categories } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
-export default function MobileNavbar() {
+type props = { isLoggedIn: boolean };
+
+export default function MobileNavbar({ isLoggedIn }: props) {
     const [open, setOpen] = useState(false);
 
     const [styleAccord, decorAccords] = [categories.styleCats, categories.decoCats].map((cats) =>
@@ -129,13 +132,15 @@ export default function MobileNavbar() {
                     <span className="sr-only">جستجو در محصولات</span>
                 </Button>
                 <Button
+                    asChild
                     variant="ghost"
                     className="h-8 w-8 rounded-md border-2 p-1 focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
-                    <UserIcon
-                        aria-hidden={true}
-                        className="h-full w-full stroke-gray-600 stroke-[1.3]"
-                    />
-                    <span className="sr-only">صفحه شخصی</span>
+                    <Link href={isLoggedIn ? "/profile" : "/login"}>
+                        <UserIcon
+                            aria-hidden={true}
+                            className="h-full w-full stroke-gray-600 stroke-[1.3]"
+                        />
+                    </Link>
                 </Button>
                 <Button
                     variant="ghost"

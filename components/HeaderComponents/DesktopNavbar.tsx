@@ -6,8 +6,11 @@ import React from "react";
 import { Separator } from "@/components/ui/separator";
 import UserInfo from "./UserInfo";
 import aknoonLogo from "@/public/logo-aknoon-gallery.png";
+import { authResultType } from "@/lib/authServices";
 
-export default function DesktopNavbar() {
+type props = { isLoggedIn: boolean };
+
+export default function DesktopNavbar({ isLoggedIn }: props) {
     return (
         <div className="hidden shadow-md sm:block sm:shadow-none">
             <div className="relative top-0 z-50 grid grid-cols-[112px_37%_1fr] items-center justify-between gap-3 bg-white px-6 py-4">
@@ -33,7 +36,7 @@ export default function DesktopNavbar() {
                     </form>
                 </div>
                 <div className="flex flex-row items-center justify-self-end">
-                    <UserInfo />
+                    <UserInfo isLoggedIn={isLoggedIn} />
                     <Separator orientation="vertical" className="mx-3 h-6" />
                     <ShoppingBagIcon className="h-6 w-6" />
                 </div>
