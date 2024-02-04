@@ -1,7 +1,5 @@
-import "./globals.css";
+import "@/app/globals.css";
 
-import Footer from "@/components/FooterComponents/Footer";
-import Header from "@/components/HeaderComponents/Header";
 import type { Metadata } from "next";
 import { Noto_Sans_Arabic } from "next/font/google";
 import clsx from "clsx";
@@ -44,9 +42,7 @@ export default function RootLayout({ children }: props) {
                     notoSansArabic.className,
                     "flex min-h-screen flex-col overflow-y-scroll",
                 )}>
-                <Header />
-                <div className="flex-grow">{children}</div>
-                <Footer />
+                {children}
             </body>
         </html>
     );
