@@ -43,7 +43,11 @@ export default function Login() {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         const result = await authLogin(values.email, values.password);
         if (result && result.error) {
-            form.setError("root", {
+            form.setError("email", {
+                type: "manual",
+                message: "",
+            });
+            form.setError("password", {
                 type: "manual",
                 message: result.error,
             });
