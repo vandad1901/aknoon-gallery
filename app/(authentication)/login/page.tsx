@@ -71,8 +71,8 @@ export default function Login() {
                         name="password"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className="flex flex-row justify-between">
-                                    <p>رمز عبور</p>
+                                <FormLabel className="inline-flex w-full flex-row justify-between">
+                                    رمز عبور
                                     <Link href="/forgot-password" className="text-sky-700">
                                         فراموشی رمز عبور
                                     </Link>
@@ -92,7 +92,7 @@ export default function Login() {
                     </Button>
                 </form>
             </Form>
-            <Link href="/signup" className="my-10 w-full text-center text-sky-700">
+            <Link href="/signup" className="my-5 w-full text-center text-sky-700 md:my-10">
                 اکانت نداری؟ اینجا ثبت نام کن
             </Link>
         </>

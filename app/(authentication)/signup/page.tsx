@@ -108,7 +108,7 @@ export default function SignUp() {
                     </Button>
                 </form>
             </Form>
-            <Link href="/login" className="my-10 w-full text-center text-sky-700">
+            <Link href="/login" className="my-5 w-full text-center text-sky-700 md:my-10">
                 ورود به اکانت
             </Link>
         </>
