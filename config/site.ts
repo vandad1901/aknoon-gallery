@@ -117,3 +117,26 @@ const news = [
 ];
 news.sort((a, b) => b.date.getTime() - a.date.getTime());
 export { news };
+
+import { Archive, KeyRound, Pencil, ShoppingBag } from "lucide-react";
+
+import type { LucideIcon } from "lucide-react";
+
+type profileItemType = { name: string; link: string; Icon: LucideIcon };
+
+const basicProfileItems: profileItemType[] = [
+    { name: "سفارشات", link: "orders", Icon: ShoppingBag },
+    { name: "اطلاعات شخصی", link: "profile", Icon: Pencil },
+];
+const artistProfileItems: profileItemType[] = [
+    { name: "مدیریت کالاها", link: "artworks", Icon: Archive },
+];
+const adminProfileItems: profileItemType[] = [
+    { name: "درخواست ها", link: "requests", Icon: KeyRound },
+];
+
+export const profileItems = [
+    { name: "شخصی", items: basicProfileItems },
+    { name: "هنرمندان", items: artistProfileItems },
+    { name: "مدیریت", items: adminProfileItems },
+];

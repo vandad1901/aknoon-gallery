@@ -9,7 +9,7 @@ type props = { isLoggedIn: boolean };
 export default async function UserInfo({ isLoggedIn }: props) {
     if (isLoggedIn)
         return (
-            <Link href="/profile">
+            <Link href="/u">
                 <UserIcon className="h-6 w-6" />
             </Link>
         );

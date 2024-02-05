@@ -135,7 +135,7 @@ export default function MobileNavbar({ isLoggedIn }: props) {
                     asChild
                     variant="ghost"
                     className="h-8 w-8 rounded-md border-2 p-1 focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
-                    <Link href={isLoggedIn ? "/profile" : "/login"}>
+                    <Link href={isLoggedIn ? "/u" : "/login"}>
                         <UserIcon
                             aria-hidden={true}
                             className="h-full w-full stroke-gray-600 stroke-[1.3]"
