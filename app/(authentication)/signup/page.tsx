@@ -10,12 +10,13 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { authSignUp, emailExists } from "@/lib/authServices";
+import { ReCaptchaValidate, authSignUp, emailExists } from "@/lib/authServices";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { useReCaptcha } from "next-recaptcha-v3";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const formSchema = z
@@ -38,6 +39,7 @@ const formSchema = z
     });
 
 export default function SignUp() {
+    const { executeRecaptcha } = useReCaptcha();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -48,6 +50,14 @@ export default function SignUp() {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
+        const ReCaptchaToken = await executeRecaptcha("login");
+        const ReCaptchaResult = await ReCaptchaValidate(ReCaptchaToken);
+        if (ReCaptchaResult === false) {
+            form.setError("email", {
+                type: "manual",
+                message: "از درخواست های بیهوده خودداری کنید.",
+            });
+        }
         if (await emailExists(values.email)) {
             form.setError("email", {
                 type: "manual",

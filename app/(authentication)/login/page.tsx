@@ -10,12 +10,13 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
+import { ReCaptchaValidate, authLogin } from "@/lib/authServices";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { authLogin } from "@/lib/authServices";
 import { useForm } from "react-hook-form";
+import { useReCaptcha } from "next-recaptcha-v3";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const formSchema = z.object({
@@ -32,6 +33,8 @@ const formSchema = z.object({
 });
 
 export default function Login() {
+    const { executeRecaptcha } = useReCaptcha();
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -41,6 +44,14 @@ export default function Login() {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
+        const ReCaptchaToken = await executeRecaptcha("login");
+        const ReCaptchaResult = await ReCaptchaValidate(ReCaptchaToken);
+        if (ReCaptchaResult === false) {
+            form.setError("email", {
+                type: "manual",
+                message: "از درخواست های بیهوده خودداری کنید.",
+            });
+        }
         const result = await authLogin(values.email, values.password);
         if (result && result.error) {
             form.setError("email", {
