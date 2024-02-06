@@ -8,7 +8,7 @@ datasource db {
   directUrl = env("DATABASE_DIRECT_URL")
 }
 
-model artworks {
+model Artwork {
   category     artworks_category
   sub_category String             @db.VarChar(50)
   name         String?            @db.VarChar(50)
