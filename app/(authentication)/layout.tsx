@@ -1,3 +1,5 @@
+import "@/app/(authentication)/style.css";
+
 import AknoonLogo from "@/public/logo-aknoon-gallery.png";
 import Image from "next/image";
 import Link from "next/link";
