@@ -45,7 +45,7 @@ export default function Login() {
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         const ReCaptchaToken = await executeRecaptcha("login");
-        const ReCaptchaResult = await ReCaptchaValidate(ReCaptchaToken);
+        const ReCaptchaResult = await ReCaptchaValidate(ReCaptchaToken, "login");
         if (ReCaptchaResult === false) {
             form.setError("email", {
                 type: "manual",

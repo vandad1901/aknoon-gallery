@@ -18,33 +18,38 @@ export async function emailExists(email: string) {
     return !!user;
 }
 
-export async function ReCaptchaValidate(token: string): Promise<boolean> {
-    const verifyUrl = `https://recaptchaenterprise.googleapis.com/v1/projects/aknoon-gallery/assessments?key=${process.env.GOOGLE_API_SECRET_KEY}`;
-    const ReCaptchaResponse = await fetch(verifyUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            event: {
-                token: token,
-                siteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-                expectedAction: "login",
+export async function ReCaptchaValidate(token: string, action: string): Promise<boolean> {
+    try {
+        const verifyUrl = `https://recaptchaenterprise.googleapis.com/v1/projects/aknoon-gallery/assessments?key=${process.env.GOOGLE_API_SECRET_KEY}`;
+        const ReCaptchaResponse = await fetch(verifyUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
             },
-        }),
-    });
-    const ReCaptchaJSON = await ReCaptchaResponse.json();
-    if (
-        ReCaptchaJSON.tokenProperties === null ||
-        ReCaptchaJSON.tokenProperties.valid === false ||
-        ReCaptchaJSON.event === null ||
-        ReCaptchaJSON.event.token !== token ||
-        ReCaptchaJSON.event.siteKey !== process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ||
-        ReCaptchaJSON.event.expectedAction !== "login"
-    ) {
+            body: JSON.stringify({
+                event: {
+                    token: token,
+                    siteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+                    expectedAction: action,
+                },
+            }),
+        });
+        const ReCaptchaJSON = await ReCaptchaResponse.json();
+        if (
+            ReCaptchaJSON.tokenProperties === null ||
+            ReCaptchaJSON.tokenProperties.valid === false ||
+            ReCaptchaJSON.event === null ||
+            ReCaptchaJSON.event.token !== token ||
+            ReCaptchaJSON.event.siteKey !== process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ||
+            ReCaptchaJSON.event.expectedAction !== action
+        ) {
+            return false;
+        }
+        return true;
+    } catch (e) {
+        console.log(e);
         return false;
     }
-    return true;
 }
 
 export async function authSignUp(email: string, password: string): Promise<ActionResult> {

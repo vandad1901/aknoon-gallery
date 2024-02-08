@@ -23,7 +23,7 @@ const formSchema = z
     .object({
         email: z
             .string()
-            .max(50, "ایمیل باید حداکثر ۵۰ کاراکتر باشد")
+            // .max(50, "ایمیل باید حداکثر ۵۰ کاراکتر باشد")
             .email({ message: "ایمیل نامعتبر" }),
         password: z
             .string()
@@ -50,8 +50,8 @@ export default function SignUp() {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        const ReCaptchaToken = await executeRecaptcha("login");
-        const ReCaptchaResult = await ReCaptchaValidate(ReCaptchaToken);
+        const ReCaptchaToken = await executeRecaptcha("signup");
+        const ReCaptchaResult = await ReCaptchaValidate(ReCaptchaToken, "signup");
         if (ReCaptchaResult === false) {
             form.setError("email", {
                 type: "manual",
