@@ -1,11 +1,10 @@
 import Link from "next/link";
-import React from "react";
-import { UserIcon } from "@heroicons/react/24/outline";
 import { profileItems } from "@/config/site";
+
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div className="fle w-max grid-cols-[12rem_1fr] px-20 pt-10">
-            <nav className="flex flex-col gap-3 rounded-xl border px-4 py-2">
+        <div className="flex flex-row gap-20 sm:px-20 sm:pt-10">
+            <nav className="hidden h-min w-48 flex-col gap-3 rounded-xl border px-4 py-2 sm:flex">
                 {profileItems.map(({ name, items }) => {
                     return (
                         <section key={name} className="space-y-2">
@@ -28,7 +27,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     );
                 })}
             </nav>
-            <div>{children}</div>
+            <div className="rounded-xl border">{children}</div>
         </div>
     );
 }
