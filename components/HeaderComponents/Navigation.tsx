@@ -1,7 +1,5 @@
 "use client";
 
-import {} from "@/config/site";
-
 import {
     BuildingStorefrontIcon,
     HomeIcon,
@@ -60,7 +58,7 @@ export default function NavigationItems() {
     return (
         <NavigationMenu
             className={cn(
-                "relative top-full z-10 w-full origin-top justify-center bg-white text-sm shadow-md transition-all duration-300",
+                "relative top-full z-10 hidden w-full origin-top justify-center bg-white text-sm shadow-md transition-all duration-300 sm:flex",
                 scrollDir == "down" && " -translate-y-full",
             )}
             dir="rtl">
