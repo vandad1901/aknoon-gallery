@@ -12,8 +12,8 @@ import { artworksPossibleValuesType, persianArtworksFields } from "@/config/site
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { SearchInput } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 
 type props = {
@@ -83,7 +83,7 @@ export default function SearchFilters({
                 <AccordionContent className="m-1 flex flex-col gap-3">
                     {possibleValues.length > 5 ? (
                         <>
-                            <Input
+                            <SearchInput
                                 className="mb-2"
                                 type="search"
                                 icon={true}
