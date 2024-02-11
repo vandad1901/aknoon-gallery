@@ -1,4 +1,4 @@
-import { MagnifyingGlassIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
+import { Search, ShoppingBag } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -35,7 +35,8 @@ export default async function Header() {
                 <Button
                     variant="ghost"
                     className="h-8 w-8 rounded-md border-2 p-1 focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 sm:hidden">
-                    <MagnifyingGlassIcon
+                    <Search
+                        strokeWidth={1.5}
                         aria-hidden={true}
                         className="h-full w-full stroke-gray-600"
                     />
@@ -46,7 +47,11 @@ export default async function Header() {
                 <Link
                     href="/u/orders"
                     className="h-8 w-8 rounded-md border-2 p-1 focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 sm:border-0 sm:p-0">
-                    <ShoppingBagIcon aria-hidden={true} className="h-full w-full stroke-gray-600" />
+                    <ShoppingBag
+                        strokeWidth={1.5}
+                        aria-hidden={true}
+                        className="h-full w-full stroke-gray-600"
+                    />
                     <span className="sr-only">سبد خرید</span>
                 </Link>
             </div>

@@ -1,11 +1,6 @@
 "use client";
 
-import {
-    BuildingStorefrontIcon,
-    HomeIcon,
-    PhoneIcon,
-    UserGroupIcon,
-} from "@heroicons/react/24/outline";
+import { Home, Info, Menu, Phone, Store } from "lucide-react";
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -18,7 +13,6 @@ import {
 } from "@/components/ui/navigation-menu";
 import React, { useEffect, useState } from "react";
 
-import { Bars3Icon } from "@heroicons/react/24/outline";
 import Categories from "./Categories";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -66,14 +60,14 @@ export default function NavigationItems() {
                 <NavigationMenuItem>
                     <Link href="/" legacyBehavior passHref>
                         <NavigationMenuLink className={topTriggerStyle}>
-                            <HomeIcon className="h-6 w-6" aria-hidden={true} />
+                            <Home strokeWidth={1.5} className="h-6 w-6" aria-hidden={true} />
                             صفحه اصلی
                         </NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                     <NavigationMenuTrigger className={topTriggerStyle}>
-                        <Bars3Icon className="h-6 w-6" aria-hidden={true} />
+                        <Menu strokeWidth={1.5} className="h-6 w-6" aria-hidden={true} />
                         دسته بندی
                     </NavigationMenuTrigger>
                     <NavigationMenuContent className="right-0">
@@ -83,7 +77,7 @@ export default function NavigationItems() {
                 <NavigationMenuItem>
                     <Link href="artworks" legacyBehavior passHref>
                         <NavigationMenuLink className={topTriggerStyle}>
-                            <BuildingStorefrontIcon className="h-6 w-6" aria-hidden={true} />
+                            <Store strokeWidth={1.5} className="h-6 w-6" aria-hidden={true} />
                             آثار
                         </NavigationMenuLink>
                     </Link>
@@ -91,7 +85,7 @@ export default function NavigationItems() {
                 <NavigationMenuItem>
                     <Link href="about" legacyBehavior passHref>
                         <NavigationMenuLink className={topTriggerStyle}>
-                            <UserGroupIcon className="h-6 w-6" aria-hidden={true} />
+                            <Info strokeWidth={1.5} className="h-6 w-6" aria-hidden={true} />
                             درباره ما
                         </NavigationMenuLink>
                     </Link>
@@ -99,7 +93,7 @@ export default function NavigationItems() {
                 <NavigationMenuItem>
                     <Link href="contact" legacyBehavior passHref>
                         <NavigationMenuLink className={topTriggerStyle}>
-                            <PhoneIcon className="h-6 w-6" aria-hidden={true} />
+                            <Phone strokeWidth={1.5} className="h-6 w-6" aria-hidden={true} />
                             تماس با ما
                         </NavigationMenuLink>
                     </Link>

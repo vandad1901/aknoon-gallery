@@ -5,13 +5,12 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { LogIn, UserRound } from "lucide-react";
 
-import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
 import { Separator } from "@/components/ui/separator";
-import { UserRound } from "lucide-react";
 import { profileItems } from "@/config/site";
 
 type props = { isLoggedIn: boolean; email: string | undefined };
@@ -46,12 +45,12 @@ export default async function UserInfo({ isLoggedIn, email }: props) {
             asChild
             className="h-8 w-8 border-2 p-0 sm:h-10 sm:w-auto sm:border sm:px-4 sm:py-2">
             <Link href="/login">
-                <ArrowLeftOnRectangleIcon className="hidden h-6 w-6 sm:block" />
+                <LogIn strokeWidth={1.5} className="ml-1 hidden h-6 w-6 -scale-[1] sm:block" />
                 <p className="hidden sm:block">ورود</p>
                 <Separator orientation="vertical" className="mx-2 hidden sm:block" />
                 <p className="hidden sm:block">ثبت نام</p>
 
-                <UserIcon className="h-8 w-8 stroke-gray-600 p-1 sm:hidden" />
+                <UserRound className="h-8 w-8 stroke-gray-600 p-1 sm:hidden" />
             </Link>
         </Button>
     );

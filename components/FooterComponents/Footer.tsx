@@ -1,22 +1,22 @@
 import Image from "next/image";
 import InstaLogo from "@/public/svg logos/instagram.svg";
 import Link from "next/link";
-import { MapPinIcon } from "@heroicons/react/24/outline";
+import { MapPin } from "lucide-react";
 import React from "react";
 import TgLogo from "@/public/svg logos/telegram.svg";
 import telephoneIcon from "@/public/svg logos/telephone.svg";
 import whatsappLogo from "@/public/svg logos/whatsapp.svg";
+
 export default function Footer() {
     return (
         <footer className="h-min w-full border-t-2">
             <div className="m-6 flex flex-col gap-2">
                 <address className="not-italic">
-                    <MapPinIcon className="inline h-8 w-8" />
-                    <strong className="flex-grow sm:flex-grow-0">به زودی: </strong>
+                    <MapPin strokeWidth={1.5} className="inline h-8 w-8" />
                     یوسف آباد، بین ۵۱ و ۵۳، مجتمع تجاری رز، طبقه همکف، واحد ۲۰
                 </address>
                 <div className="flex flex-row justify-between">
-                    <div className="grid grid-cols-1 font-sans gap-y-1 sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-3">
+                    <div className="grid grid-cols-1 gap-y-1 font-sans sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-3">
                         <Link
                             href="https://www.instagram.com/aknoongallery/"
                             className="grid grid-cols-[2rem_1fr] gap-1">
