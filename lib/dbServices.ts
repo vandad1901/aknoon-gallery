@@ -14,11 +14,17 @@ export async function fetchArtworks(searchParams: searchParamType) {
 }
 
 export async function fetchPossibleValues(searchParams?: searchParamType) {
-    const valuesArray = await prisma.$transaction(
-        artworksFields.map((field) =>
-            prisma.artwork.findMany({ distinct: [field], select: { [field]: true } }),
-        ),
-    );
+    const valuesArray = await prisma.$transaction([
+        prisma.artwork.findMany({ distinct: "sub_category", select: { sub_category: true } }),
+        prisma.artwork.findMany({ distinct: "name", select: { name: true } }),
+        prisma.artwork.findMany({ distinct: "material", select: { material: true } }),
+        prisma.artwork.findMany({ distinct: "technique", select: { technique: true } }),
+        prisma.artwork.findMany({ distinct: "style", select: { style: true } }),
+        prisma.artwork.findMany({ distinct: "form", select: { form: true } }),
+        prisma.artwork.findMany({ distinct: "size", select: { size: true } }),
+        prisma.artwork.findMany({ distinct: "color", select: { color: true } }),
+        prisma.artwork.findMany({ distinct: "stone_type", select: { stone_type: true } }),
+    ]);
     const possibleValues = Object.fromEntries(
         artworksFields.map((field, index) => {
             const distinctValues = valuesArray[index] as { [field: string]: string }[];
