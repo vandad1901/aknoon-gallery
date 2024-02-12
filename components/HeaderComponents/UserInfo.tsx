@@ -19,10 +19,13 @@ export default async function UserInfo({ isLoggedIn, email }: props) {
         return (
             <DropdownMenu dir="rtl">
                 <DropdownMenuTrigger>
-                    <UserRound className="h-8 w-8 rounded-md border-2 stroke-gray-600 p-1 sm:rounded-none sm:border-0 sm:p-0" />
+                    <UserRound
+                        strokeWidth={1.5}
+                        className="h-8 w-8 rounded-md border-2 stroke-gray-600 p-1 sm:rounded-none sm:border-0 sm:p-0"
+                    />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48 p-2">
-                    <p className="text-md truncate font-medium">{email}</p>
+                    <p className="text-md truncate font-serif font-medium">{email}</p>
                     <DropdownMenuSeparator />
                     {profileItems[0].items.map(({ name, link, Icon }) => {
                         return (
