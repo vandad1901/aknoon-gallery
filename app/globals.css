@@ -75,6 +75,10 @@
     }
 }
 
-.grecaptcha-badge { 
+.grecaptcha-badge {
     visibility: hidden;
+}
+
+#auth-page ~ div> .grecaptcha-badge { 
+    visibility: visible;
 }

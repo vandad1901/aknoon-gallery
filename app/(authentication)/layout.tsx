@@ -1,5 +1,3 @@
-import "@/app/(authentication)/style.css";
-
 import AknoonLogo from "@/public/logo-aknoon-gallery.png";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +8,9 @@ type props = { children: React.ReactNode };
 export default function AuthLayout({ children }: props) {
     return (
         <ReCaptchaProvider useEnterprise language="fa">
-            <div className="mx-2 mt-10 flex flex-col items-start justify-center gap-5 md:mx-10 md:mt-40 md:grid md:grid-cols-[3fr_2fr] md:gap-10">
+            <div
+                id="auth-page"
+                className="mx-2 mt-10 flex flex-col items-start justify-center gap-5 md:mx-10 md:mt-40 md:grid md:grid-cols-[3fr_2fr] md:gap-10">
                 <Link href="/" className="w-full">
                     <Image
                         src={AknoonLogo}

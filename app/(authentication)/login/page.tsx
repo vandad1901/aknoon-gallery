@@ -51,6 +51,7 @@ export default function Login() {
                 type: "manual",
                 message: "از درخواست های بیهوده خودداری کنید.",
             });
+            return;
         }
         const result = await authLogin(values.email, values.password);
         if (result && result.error) {

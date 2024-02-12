@@ -57,6 +57,7 @@ export default function SignUp() {
                 type: "manual",
                 message: "از درخواست های بیهوده خودداری کنید.",
             });
+            return;
         }
         if (await emailExists(values.email)) {
             form.setError("email", {
