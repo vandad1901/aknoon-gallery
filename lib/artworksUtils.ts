@@ -1,13 +1,7 @@
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-import { artworksFields } from "@/config/site";
 import { ReadonlyURLSearchParams } from "next/navigation";
+import { artworksFields } from "@/config/site";
 
 export type searchParamType = { [key: string]: string | string[] | undefined };
-
-export function cn(...inputs: ClassValue[]) {
-    return twMerge(clsx(inputs));
-}
 
 function sortParams(params: URLSearchParams) {
     const paramsArray: [string, string][] = Array.from(params.entries());

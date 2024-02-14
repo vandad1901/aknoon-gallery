@@ -9,7 +9,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import React, { useState } from "react";
-import { ReadonlyToObject, UpdateQueryStringKV } from "@/lib/utils";
+import { ReadonlyToObject, UpdateQueryStringKV } from "@/lib/artworksUtils";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 

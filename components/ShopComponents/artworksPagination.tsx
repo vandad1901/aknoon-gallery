@@ -6,7 +6,7 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination";
-import { UpdateQueryStringKV, type searchParamType } from "@/lib/utils";
+import { UpdateQueryStringKV, type searchParamType } from "@/lib/artworksUtils";
 
 type props = { currentPage: number; totalPages: number; searchParams: searchParamType };
 

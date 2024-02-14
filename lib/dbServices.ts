@@ -1,8 +1,8 @@
 import { artworksFields, artworksPossibleValuesType } from "@/config/site";
 
-import { getPrismaWhereObject } from "@/lib/utils";
+import { getPrismaWhereObject } from "@/lib/artworksUtils";
 import prisma from "@/lib/db";
-import type { searchParamType } from "@/lib/utils";
+import type { searchParamType } from "@/lib/artworksUtils";
 
 export async function fetchArtworks(searchParams: searchParamType) {
     const whereObject = getPrismaWhereObject(searchParams);

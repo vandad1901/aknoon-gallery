@@ -15,7 +15,7 @@ import React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import placeholder from "@/public/artworksPlaceholder.svg";
-import type { searchParamType } from "@/lib/utils";
+import type { searchParamType } from "@/lib/artworksUtils";
 
 type props = { searchParams: searchParamType };
 

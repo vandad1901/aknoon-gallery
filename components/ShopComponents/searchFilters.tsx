@@ -7,7 +7,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 import React, { useState } from "react";
-import { ReadonlyToObject, UpdateQueryStringKV, addQueryStringKV } from "@/lib/utils";
+import { ReadonlyToObject, UpdateQueryStringKV, addQueryStringKV } from "@/lib/artworksUtils";
 import { artworksPossibleValuesType, persianArtworksFields } from "@/config/site";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
