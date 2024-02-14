@@ -94,6 +94,21 @@ export async function authLogin(email: string, password: string): Promise<Action
     return redirect("/");
 }
 
+export async function authLogout(): Promise<ActionResult> {
+    const { session } = await validateRequest();
+    if (!session) {
+        return {
+            error: "Unauthorized",
+        };
+    }
+
+    await lucia.invalidateSession(session.id);
+
+    const sessionCookie = lucia.createBlankSessionCookie();
+    cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+    return redirect("/");
+}
+
 export const validateRequest = cache(async (): Promise<authResultType> => {
     const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
     if (!sessionId) {

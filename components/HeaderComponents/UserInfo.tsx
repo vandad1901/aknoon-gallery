@@ -1,3 +1,14 @@
+"use client";
+
+import {
+    AlertDialog,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -5,42 +16,73 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogIn, UserRound } from "lucide-react";
+import { LogIn, LogOut, UserRound } from "lucide-react";
+import React, { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import React from "react";
 import { Separator } from "@/components/ui/separator";
+import { authLogout } from "@/lib/authServices";
 import { profileItems } from "@/config/site";
 
 type props = { isLoggedIn: boolean; email: string | undefined };
-export default async function UserInfo({ isLoggedIn, email }: props) {
+export default function UserInfo({ isLoggedIn, email }: props) {
+    const [logOutOpen, setLogOutOpen] = useState(false);
     if (isLoggedIn)
         return (
-            <DropdownMenu dir="rtl">
-                <DropdownMenuTrigger>
-                    <UserRound
-                        strokeWidth={1.5}
-                        className="h-8 w-8 rounded-md border-2 stroke-gray-600 p-1 sm:rounded-none sm:border-0 sm:p-0"
-                    />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48 p-2">
-                    <p className="text-md truncate font-serif font-medium">{email}</p>
-                    <DropdownMenuSeparator />
-                    {profileItems[0].items.map(({ name, link, Icon }) => {
-                        return (
-                            <DropdownMenuItem key={name}>
-                                <Link
-                                    href={link}
-                                    className="inline-flex flex-row content-center items-center justify-center gap-2 text-sm">
-                                    <Icon strokeWidth={1.25} />
-                                    {name}
-                                </Link>
-                            </DropdownMenuItem>
-                        );
-                    })}
-                </DropdownMenuContent>
-            </DropdownMenu>
+            <>
+                <DropdownMenu dir="rtl">
+                    <DropdownMenuTrigger>
+                        <UserRound
+                            strokeWidth={1.5}
+                            className="h-8 w-8 rounded-md border-2 stroke-gray-600 p-1 sm:rounded-none sm:border-0 sm:p-0"
+                        />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-48 p-2">
+                        <p className="text-md truncate">{email}</p>
+                        <DropdownMenuSeparator />
+                        {profileItems[0].items.map(({ name, link, Icon }) => {
+                            return (
+                                <DropdownMenuItem key={name}>
+                                    <Link
+                                        href={link}
+                                        className="inline-flex flex-row content-center items-center justify-center gap-2 text-sm">
+                                        <Icon strokeWidth={1.25} />
+                                        {name}
+                                    </Link>
+                                </DropdownMenuItem>
+                            );
+                        })}{" "}
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onSelect={() => setLogOutOpen(true)}>
+                            <div className="inline-flex flex-row content-center items-center justify-center gap-2 text-sm">
+                                <LogOut strokeWidth={1.25} />
+                                خروج
+                            </div>
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+                <AlertDialog open={logOutOpen} onOpenChange={setLogOutOpen}>
+                    <AlertDialogContent>
+                        <AlertDialogHeader>
+                            <AlertDialogTitle>خروج از حساب</AlertDialogTitle>
+                        </AlertDialogHeader>
+                        <AlertDialogDescription>
+                            آیا مطمئن هستید که می‌خواهید از حساب کاربری خود خارج شوید؟
+                        </AlertDialogDescription>
+                        <AlertDialogFooter>
+                            <AlertDialogCancel>لغو</AlertDialogCancel>
+                            <Button
+                                variant="destructive"
+                                onClick={() => {
+                                    authLogout();
+                                }}>
+                                خروج
+                            </Button>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialog>
+            </>
         );
     return (
         <Button
