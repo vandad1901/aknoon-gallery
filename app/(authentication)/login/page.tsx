@@ -15,6 +15,7 @@ import { ReCaptchaValidate, authLogin } from "@/lib/authServices";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { noTryAsync } from "@/lib/utils";
 import { useForm } from "react-hook-form";
 import { useReCaptcha } from "next-recaptcha-v3";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -44,7 +45,11 @@ export default function Login() {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        const ReCaptchaToken = await executeRecaptcha("login");
+        const [err, ReCaptchaToken] = await noTryAsync(async () => executeRecaptcha("login"));
+        if (err) {
+            form.setError("email", { type: "manual", message: "لطفا کمی صبر کنید" });
+            return;
+        }
         const ReCaptchaResult = await ReCaptchaValidate(ReCaptchaToken, "login");
         if (ReCaptchaResult === false) {
             form.setError("email", {
