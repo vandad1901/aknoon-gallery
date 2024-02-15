@@ -79,7 +79,7 @@ function ArtworkCard({ artwork }: ArtworkCardProps) {
                     {artwork.model && ` - ${artwork.model}`}
                 </p>
                 <p className="font-semibold">
-                    قیمت: {(artwork.sell_price.toNumber() * 1000).toLocaleString("fa-IR")}
+                    قیمت: {(artwork.sell_price.toNumber() * 1000).toLocaleString("fa-IR")} تومان
                 </p>
             </div>
         </div>
