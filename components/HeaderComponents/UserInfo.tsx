@@ -45,7 +45,7 @@ export default function UserInfo({ isLoggedIn, email }: props) {
                             return (
                                 <DropdownMenuItem key={name}>
                                     <Link
-                                        href={link}
+                                        href={`/u/${link}`}
                                         className="inline-flex flex-row content-center items-center justify-center gap-2 text-sm">
                                         <Icon strokeWidth={1.25} />
                                         {name}
