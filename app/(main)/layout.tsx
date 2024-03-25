@@ -7,7 +7,7 @@ export default function RootLayout({ children }: props) {
     return (
         <>
             <Header />
-            <div className="flex-grow">{children}</div>
+            <div className="flex-grow pb-4">{children}</div>
             <Footer />
         </>
     );

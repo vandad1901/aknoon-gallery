@@ -27,7 +27,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     );
                 })}
             </nav>
-            <div className="rounded-xl border">{children}</div>
+            <div className="overflow-hidden rounded-xl border">{children}</div>
         </div>
     );
 }

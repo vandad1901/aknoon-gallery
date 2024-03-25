@@ -44,4 +44,33 @@ const SearchInput = React.forwardRef<HTMLInputElement, InputProps>(
 );
 SearchInput.displayName = "SearchInput";
 
-export { SearchInput, Input };
+type DebouncedInputType = {
+    value: string | number;
+    onChange: (value: string | number) => void;
+    debounce?: number;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">;
+
+const DebouncedInput = React.forwardRef<HTMLInputElement, DebouncedInputType>(
+    ({ value: initialValue, onChange, debounce = 500, ...props }, ref) => {
+        const [value, setValue] = React.useState(initialValue);
+
+        React.useEffect(() => {
+            setValue(initialValue);
+        }, [initialValue]);
+
+        React.useEffect(() => {
+            const timeout = setTimeout(() => {
+                onChange(value);
+            }, debounce);
+
+            return () => clearTimeout(timeout);
+        }, [value]);
+
+        return (
+            <Input {...props} value={value} onChange={(e) => setValue(e.target.value)} ref={ref} />
+        );
+    },
+);
+DebouncedInput.displayName = "DebouncedInput";
+
+export { SearchInput, Input, DebouncedInput };

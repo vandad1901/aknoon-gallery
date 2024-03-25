@@ -1,3 +1,5 @@
+"use server";
+
 import { artworksFields, artworksPossibleValuesType } from "@/config/site";
 
 import { getPrismaWhereObject } from "@/lib/artworksUtils";
@@ -51,4 +53,35 @@ export async function fetchPageInfo(searchParams: searchParamType) {
     const whereObject = getPrismaWhereObject(searchParams);
     const count = await prisma.artwork.count({ where: whereObject });
     return Math.max(Math.ceil(count / 12), 1);
+}
+
+export async function fetchArtworksRows(searchParams: searchParamType) {
+    const whereObject = getPrismaWhereObject(searchParams);
+    const [res, count] = await prisma.$transaction([
+        prisma.artwork.findMany({
+            where: whereObject,
+        }),
+        prisma.artwork.count({ where: whereObject }),
+    ]);
+
+    const pickedData = res.map((row) => {
+        return {
+            ID: row.ID,
+            artist: row.artist,
+            name: row.name || "",
+            buy_price: Number(row.buy_price),
+            sell_price: Number(row.sell_price),
+            category: row.category == "decor" ? "دکوراسیون" : "استایل",
+            sub_category: row.sub_category,
+            form: row.form || "",
+            stone_type: row.stone_type || "",
+            size: row.size || "",
+            color: row.color || "",
+            material: row.material || "",
+            technique: row.technique || "",
+            style: row.style || "",
+        };
+    });
+
+    return pickedData;
 }
