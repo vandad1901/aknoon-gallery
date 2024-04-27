@@ -116,10 +116,7 @@ function Filter({ column, table }: { column: Column<any, unknown>; table: TanTab
                     type="number"
                     min={Number(column.getFacetedMinMaxValues()?.[0] ?? "")}
                     max={Number(column.getFacetedMinMaxValues()?.[1] ?? "")}
-                    value={
-                        (columnFilterValue as [number, number])?.[0] ??
-                        Number(column.getFacetedMinMaxValues()?.[0])
-                    }
+                    value={(columnFilterValue as [number, number])?.[0] ?? ""}
                     onChange={(value) =>
                         column.setFilterValue((old: [number, number]) => [value, old?.[1]])
                     }
@@ -134,10 +131,7 @@ function Filter({ column, table }: { column: Column<any, unknown>; table: TanTab
                     type="number"
                     min={Number(column.getFacetedMinMaxValues()?.[0] ?? "")}
                     max={Number(column.getFacetedMinMaxValues()?.[1] ?? "")}
-                    value={
-                        (columnFilterValue as [number, number])?.[1] ??
-                        Number(column.getFacetedMinMaxValues()?.[1])
-                    }
+                    value={(columnFilterValue as [number, number])?.[1] ?? ""}
                     onChange={(value) =>
                         column.setFilterValue((old: [number, number]) => [old?.[0], value])
                     }
