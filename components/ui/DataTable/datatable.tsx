@@ -20,9 +20,10 @@ import { ScrollAreaThumb } from "@radix-ui/react-scroll-area";
 
 interface DataTableProps<TData, TValue> {
     table: TanTable<TData>;
+    isLoading: boolean;
 }
 
-export function DataTable<TData, TValue>({ table }: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({ table, isLoading }: DataTableProps<TData, TValue>) {
     return (
         <ScrollArea type="auto" dir="rtl">
             <div className="m-4 flex flex-col gap-4">
@@ -83,7 +84,7 @@ export function DataTable<TData, TValue>({ table }: DataTableProps<TData, TValue
                                     <TableCell
                                         colSpan={Math.min(3, table.getAllColumns().length)}
                                         className="h-24 text-center">
-                                        نتیجه ای یافت نشد.
+                                        {isLoading ? "در حال بارگذاری..." : "نتیجه ای یافت نشد."}
                                     </TableCell>
                                 </TableRow>
                             )}

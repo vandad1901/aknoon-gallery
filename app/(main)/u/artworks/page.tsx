@@ -68,10 +68,14 @@ export default function AdminArtworks() {
         getFacetedMinMaxValues: getFacetedMinMaxValues(),
     });
     useEffect(() => {
-        fetchArtworksRows({}).then((rows) => {
-            setData(rows);
-            setLoading(false);
-        });
+        fetchArtworksRows({})
+            .then((rows) => {
+                setData(rows);
+                setLoading(false);
+            })
+            .catch(() => {
+                setLoading(false);
+            });
     }, []);
-    return <DataTable table={table} />;
+    return <DataTable table={table} isLoading={loading} />;
 }
