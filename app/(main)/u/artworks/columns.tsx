@@ -85,7 +85,7 @@ export const columns: ColumnDef<ArtworkRow>[] = [
             const amount = parseFloat(row.getValue("buy_price"));
             const formatted = amount.toLocaleString("fa-IR");
 
-            return formatted;
+            return <div className="text-center">{formatted}</div>;
         },
     },
     {
@@ -95,7 +95,7 @@ export const columns: ColumnDef<ArtworkRow>[] = [
             const amount = parseFloat(row.getValue("sell_price"));
             const formatted = amount.toLocaleString("fa-IR");
 
-            return formatted;
+            return <div className="text-center">{formatted}</div>;
         },
     },
     {
