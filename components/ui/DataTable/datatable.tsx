@@ -113,7 +113,7 @@ function Filter({ column, table }: { column: Column<any, unknown>; table: TanTab
     return typeof firstValue === "number" ? (
         <div>
             <div className="flex gap-2">
-                <DebouncedInput //TODO: replace with verbose sliders
+                <DebouncedInput
                     type="number"
                     min={Number(column.getFacetedMinMaxValues()?.[0] ?? "")}
                     max={Number(column.getFacetedMinMaxValues()?.[1] ?? "")}
@@ -126,7 +126,7 @@ function Filter({ column, table }: { column: Column<any, unknown>; table: TanTab
                             ? `(${column.getFacetedMinMaxValues()?.[0]})`
                             : ""
                     }`}
-                    className="w-28 rounded border shadow"
+                    className="w-32 rounded border shadow"
                 />
                 <DebouncedInput
                     type="number"
@@ -141,7 +141,7 @@ function Filter({ column, table }: { column: Column<any, unknown>; table: TanTab
                             ? `(${column.getFacetedMinMaxValues()?.[1]})`
                             : ""
                     }`}
-                    className="w-28 rounded border shadow"
+                    className="w-32 rounded border shadow"
                 />
             </div>
         </div>

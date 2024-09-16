@@ -75,6 +75,35 @@ export const columns: ColumnDef<ArtworkRow>[] = [
         enableHiding: false,
         enableColumnFilter: false,
     },
+    {
+        enableColumnFilter: false,
+        id: "عملیات",
+        header: "عملیات",
+        cell: ({ row }) => {
+            return (
+                //TODO: Add edit and delete functionality
+                <DropdownMenu dir="rtl">
+                    <DropdownMenuTrigger asChild>
+                        <Button variant={"outline"} className="px-2EDT">
+                            عملیات
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-40">
+                        <DropdownMenuItem asChild>
+                            <Button variant={"ghost"} className="w-full">
+                                ویرایش
+                            </Button>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                            <Button variant={"ghost"} className="w-full">
+                                حذف
+                            </Button>
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            );
+        },
+    },
     { accessorKey: "ID", header: "کد" },
     { accessorKey: "artist", header: "آرتیست", sortingFn: fuzzySort, filterFn: "fuzzy" },
     { id: "name", accessorKey: "name", header: "نام", sortingFn: fuzzySort, filterFn: "fuzzy" },
@@ -113,33 +142,4 @@ export const columns: ColumnDef<ArtworkRow>[] = [
     { accessorKey: "material", header: "متریال", sortingFn: fuzzySort, filterFn: "fuzzy" },
     { accessorKey: "technique", header: "تکنیک", sortingFn: fuzzySort, filterFn: "fuzzy" },
     { accessorKey: "style", header: "استایل", sortingFn: fuzzySort, filterFn: "fuzzy" },
-    {
-        enableColumnFilter: false,
-        id: "عملیات",
-        header: "عملیات",
-        cell: ({ row }) => {
-            return (
-                //TODO: Add edit and delete functionality
-                <DropdownMenu dir="rtl">
-                    <DropdownMenuTrigger asChild>
-                        <Button variant={"outline"} className="px-2EDT">
-                            عملیات
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-40">
-                        <DropdownMenuItem asChild>
-                            <Button variant={"ghost"} className="w-full">
-                                ویرایش
-                            </Button>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                            <Button variant={"ghost"} className="w-full">
-                                حذف
-                            </Button>
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            );
-        },
-    },
 ];
