@@ -75,7 +75,7 @@ export default function NavigationItems() {
                     </NavigationMenuContent>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                    <Link href="artworks" legacyBehavior passHref>
+                    <Link href="/artworks" legacyBehavior passHref>
                         <NavigationMenuLink className={topTriggerStyle}>
                             <Store strokeWidth={1.5} className="h-6 w-6" aria-hidden={true} />
                             آثار
@@ -83,7 +83,7 @@ export default function NavigationItems() {
                     </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                    <Link href="about" legacyBehavior passHref>
+                    <Link href="/about" legacyBehavior passHref>
                         <NavigationMenuLink className={topTriggerStyle}>
                             <Info strokeWidth={1.5} className="h-6 w-6" aria-hidden={true} />
                             درباره ما
@@ -91,7 +91,7 @@ export default function NavigationItems() {
                     </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                    <Link href="contact" legacyBehavior passHref>
+                    <Link href="/contact" legacyBehavior passHref>
                         <NavigationMenuLink className={topTriggerStyle}>
                             <Phone strokeWidth={1.5} className="h-6 w-6" aria-hidden={true} />
                             تماس با ما
