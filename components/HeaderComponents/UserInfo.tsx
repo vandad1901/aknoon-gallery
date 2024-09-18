@@ -39,7 +39,9 @@ export default function UserInfo({ isLoggedIn, email }: props) {
                         />
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-48 p-2">
-                        <p className="text-md truncate">{email}</p>
+                        <p className="truncate font-sans" dir="ltr">
+                            {email}
+                        </p>
                         <DropdownMenuSeparator />
                         {profileItems[0].items.map(({ name, link, Icon }) => {
                             return (
