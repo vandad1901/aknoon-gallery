@@ -56,14 +56,18 @@ export default function SignUp() {
             form.setError("email", { type: "manual", message: "لطفا کمی صبر کنید" });
             return;
         }
-        const ReCaptchaResult = await ReCaptchaValidate(ReCaptchaToken, "signup");
-        if (ReCaptchaResult === false) {
-            form.setError("email", {
-                type: "manual",
-                message: "از درخواست های بیهوده خودداری کنید.",
-            });
-            return;
+
+        if (process.env.NODE_ENV !== "development") {
+            const ReCaptchaResult = await ReCaptchaValidate(ReCaptchaToken, "signup");
+            if (ReCaptchaResult === false) {
+                form.setError("email", {
+                    type: "manual",
+                    message: "از درخواست های بیهوده خودداری کنید.",
+                });
+                return;
+            }
         }
+
         if (await emailExists(values.email)) {
             form.setError("email", {
                 type: "manual",
@@ -71,8 +75,10 @@ export default function SignUp() {
             });
             return;
         }
+
         return authSignUp(values.email, values.password);
     }
+    
     return (
         <>
             <Form {...form}>
