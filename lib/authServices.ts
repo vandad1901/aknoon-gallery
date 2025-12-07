@@ -62,12 +62,14 @@ export async function authSignUp(email: string, password: string): Promise<Actio
                 password_hash: hash,
             },
         });
+
         const session = await lucia.createSession(user.id, {});
         const sessionCookie = lucia.createSessionCookie(session.id);
-        cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+        (await cookies()).set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
     } catch (e: any) {
         return { error: e.message };
     }
+
     return redirect("/");
 }
 
@@ -90,7 +92,7 @@ export async function authLogin(email: string, password: string): Promise<Action
 
     const session = await lucia.createSession(existingUser.id, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
-    cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+    (await cookies()).set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
     return redirect("/");
 }
 
@@ -105,12 +107,12 @@ export async function authLogout(): Promise<ActionResult> {
     await lucia.invalidateSession(session.id);
 
     const sessionCookie = lucia.createBlankSessionCookie();
-    cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+    (await cookies()).set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
     return redirect("/");
 }
 
 export const validateRequest = cache(async (): Promise<authResultType> => {
-    const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
+    const sessionId = (await cookies()).get(lucia.sessionCookieName)?.value ?? null;
     if (!sessionId) {
         return { isLoggedIn: false, user: null, session: null };
     }
@@ -119,12 +121,20 @@ export const validateRequest = cache(async (): Promise<authResultType> => {
     try {
         if (result.session && result.session.fresh) {
             const sessionCookie = lucia.createSessionCookie(result.session.id);
-            cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+            (await cookies()).set(
+                sessionCookie.name,
+                sessionCookie.value,
+                sessionCookie.attributes,
+            );
         }
         if (!result.session) {
             // Blank session deletes the session on the user's device
             const sessionCookie = lucia.createBlankSessionCookie();
-            cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+            (await cookies()).set(
+                sessionCookie.name,
+                sessionCookie.value,
+                sessionCookie.attributes,
+            );
         }
     } catch {}
     if (result.user !== null && result.session !== null) {
