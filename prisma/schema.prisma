@@ -3,9 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgres"
-  url       = env("DATABASE_URL")
-  directUrl = env("DATABASE_DIRECT_URL")
+  provider = "postgres"
 }
 
 model Artwork {
@@ -33,12 +31,12 @@ model Artwork {
   inventory  Int                @default(0)
   location   artworks_location? @default(IR)
 
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  created_at DateTime
+  updated_at DateTime
 }
 
 model User {
-  id            String    @id @db.Char(15)
+  id            BigInt    @id @default(autoincrement())
   email         String    @unique @db.VarChar(50)
   password_hash String    @db.VarChar(128)
   Session       Session[]
@@ -49,14 +47,14 @@ model User {
   sheba      String? @db.Char(24)
   percentage Decimal @default(35.000) @db.Decimal(6, 3)
 
-  created_at DateTime  @default(now())
-  updated_at DateTime? @default(now())
+  created_at DateTime
+  updated_at DateTime
 }
 
 model Session {
   id     String @id
-  user   User   @relation(references: [id], fields: [userId], onDelete: Cascade)
-  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId BigInt
 
   expiresAt DateTime
 }
