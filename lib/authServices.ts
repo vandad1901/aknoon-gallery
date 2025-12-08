@@ -57,13 +57,16 @@ export async function authSignUp(email: string, password: string): Promise<Actio
     try {
         const user = await prisma.user.create({
             data: {
-                id: generateId(15),
+                id: Number(generateId(15)),
                 email: email,
                 password_hash: hash,
+
+                created_at: new Date(),
+                updated_at: new Date(),
             },
         });
 
-        const session = await lucia.createSession(user.id, {});
+        const session = await lucia.createSession(String(user.id), {});
         const sessionCookie = lucia.createSessionCookie(session.id);
         (await cookies()).set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
     } catch (e: any) {
@@ -90,7 +93,7 @@ export async function authLogin(email: string, password: string): Promise<Action
         };
     }
 
-    const session = await lucia.createSession(existingUser.id, {});
+    const session = await lucia.createSession(String(existingUser.id), {});
     const sessionCookie = lucia.createSessionCookie(session.id);
     (await cookies()).set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
     return redirect("/");
