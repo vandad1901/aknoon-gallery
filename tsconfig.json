@@ -19,7 +19,8 @@
         ],
         "paths": {
             "@/*": ["./*"],
-            "@/config/*": ["./.config/*"]
+            "@/config/*": ["./.config/*"],
+            "@prisma/*": ["./generated/prisma/*"]
         },
         "allowJs": true
     },
