@@ -15,7 +15,7 @@ export default function AuthLayout({ children }: props) {
                     <Image
                         src={AknoonLogo}
                         alt="لوگوی اکنون"
-                        className="mx-auto h-full w-[20rem] object-contain md:relative md:top-10 md:w-[40rem]"
+                        className="mx-auto h-full w-[20rem] object-contain md:relative md:top-10 md:w-160"
                     />
                 </Link>
                 <div className="flex w-full flex-col gap-10 rounded-xl p-4 md:w-96 md:border">

@@ -45,7 +45,7 @@ export default function SearchFilters({
         possibleValues
             .filter((val) => key != currentSearchingField || val.includes(searchText))
             .map((value) => (
-                <div key={value} className="flex flex-row items-center gap-2 py-[0.375rem]">
+                <div key={value} className="flex flex-row items-center gap-2 py-1.5">
                     <Checkbox
                         className="disabled:cursor-wait"
                         id={value}

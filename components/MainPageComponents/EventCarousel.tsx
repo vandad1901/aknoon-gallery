@@ -8,8 +8,9 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { news } from "@/config/site";
+
 import Image from "next/image";
+import { news } from "@/.config/site";
 
 export default function EventCarousel() {
     return (
@@ -20,11 +21,11 @@ export default function EventCarousel() {
                     align: "start",
                     direction: "rtl",
                 }}>
-                <CarouselContent className="-m-0">
+                <CarouselContent className="m-0">
                     {news.map((newsItem) => (
                         <CarouselItem
                             key={newsItem.title}
-                            className="aspect-square p-1 sm:aspect-[3/4] sm:basis-1/2 sm:p-2 md:basis-1/3 lg:p-3 xl:basis-1/4">
+                            className="aspect-square p-1 sm:aspect-3/4 sm:basis-1/2 sm:p-2 md:basis-1/3 lg:p-3 xl:basis-1/4">
                             <div className="group relative h-full w-full overflow-hidden rounded-xl bg-white p-4">
                                 <div className="relative h-full w-full">
                                     <Dialog>

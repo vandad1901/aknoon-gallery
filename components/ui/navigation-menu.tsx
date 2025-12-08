@@ -32,7 +32,7 @@ NavigationMenuList.displayName = NavigationMenuPrimitive.List.displayName;
 const NavigationMenuItem = NavigationMenuPrimitive.Item;
 
 const navigationMenuTriggerStyle = cva(
-    "group gap-2 inline-flex items-center bg-background text-sm font-medium transition-colors hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none hover:bg-accent disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
+    "group gap-2 inline-flex items-center bg-background text-sm font-medium transition-colors hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-hidden disabled:pointer-events-none hover:bg-accent disabled:opacity-50 data-active:bg-accent/50 data-[state=open]:bg-accent/50",
 );
 
 export const topTriggerStyle = cn(
@@ -50,7 +50,7 @@ const NavigationMenuTrigger = React.forwardRef<
         {...props}>
         {children}
         {/* <ChevronDown
-            className="relative top-[1px] ml-1 h-6 w-6 stroke-[0.9] transition duration-200 group-data-[state=open]:rotate-180"
+            className="relative top-px ml-1 h-6 w-6 stroke-[0.9] transition duration-200 group-data-[state=open]:rotate-180"
             aria-hidden="true"
         /> */}
     </NavigationMenuPrimitive.Trigger>
@@ -96,7 +96,7 @@ const NavigationMenuIndicator = React.forwardRef<
     <NavigationMenuPrimitive.Indicator
         ref={ref}
         className={cn(
-            "top-full z-[1] flex h-1.5 items-end justify-center overflow-hidden data-[state=visible]:animate-in data-[state=hidden]:animate-out data-[state=hidden]:fade-out data-[state=visible]:fade-in",
+            "top-full z-1 flex h-1.5 items-end justify-center overflow-hidden data-[state=visible]:animate-in data-[state=hidden]:animate-out data-[state=hidden]:fade-out data-[state=visible]:fade-in",
             className,
         )}
         {...props}>

@@ -53,7 +53,7 @@ export default function MobileNavMenu() {
             </SheetTrigger>
 
             <SheetContent side="right" className="pl-2 pr-3 pt-14">
-                <Link href="/" className="absolute right-3 top-3 h-8 w-[4.5rem]"></Link>
+                <Link href="/" className="absolute right-3 top-3 h-8 w-18"></Link>
                 <Separator orientation="horizontal" />
                 <ScrollArea dir="rtl" className="h-full w-full pb-5 pl-4">
                     <div className="flex flex-col space-y-3 pt-4">

@@ -12,7 +12,7 @@ type props = { currentPage: number; totalPages: number; searchParams: searchPara
 
 export default function ArtworksPagination({ currentPage, totalPages, searchParams }: props) {
     return (
-        <Pagination className="flex-grow">
+        <Pagination className="grow">
             <PaginationContent>
                 <PaginationPrevious
                     isActive={currentPage > 1}

@@ -22,7 +22,7 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
                 placeholder="سرچ در تمام ستون ها..."
                 value={globalFilter ?? ""}
                 onChange={(value) => table.setGlobalFilter(value)}
-                className="h-10 w-[10rem] lg:w-[18rem]"
+                className="h-10 w-40 lg:w-[18rem]"
             />
             {isFiltered && (
                 <Button

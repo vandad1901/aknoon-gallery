@@ -21,7 +21,7 @@ export default function Categories() {
                 <NavigationMenuTrigger className="w-full py-2 pr-2 data-[state=open]:text-aknoon">
                     {val[0][0]}
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="grid w-full grid-flow-col grid-cols-[200px_1fr] grid-rows-6 data-[motion^=from-]:animate-fadeIn">
+                <NavigationMenuContent className="grid w-full grid-flow-col grid-cols-[200px_1fr] grid-rows-6 data-[motion^=from-]:animate-fade-in">
                     {val[1].map((subVal) => (
                         <Link
                             className="w-full"
@@ -49,7 +49,7 @@ export default function Categories() {
                 <Separator orientation="horizontal" className="bg-gray-200"/>
                 {styleSubs}
             </NavigationMenuList>
-            <NavigationMenuViewport className="right-24 top-0 h-80 w-[34rem]" />
+            <NavigationMenuViewport className="right-24 top-0 h-80 w-136" />
         </NavigationMenuSub>
     );
 }

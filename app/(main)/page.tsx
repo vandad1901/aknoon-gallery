@@ -7,7 +7,7 @@ export default function Home() {
         <main className="flex flex-col items-center gap-9 pt-0">
             <ImageSlider />
             <p
-                className="sm:text-md mx-2 max-w-[60ch] hyphens-auto break-words border-dotted text-center text-lg"
+                className="sm:text-md mx-2 max-w-[60ch] hyphens-auto wrap-break-word border-dotted text-center text-lg"
                 lang="fa">
                 <Aknoon /> اشاره به زمان حال دارد. در برابر گذشته ای از کف رفته و آینده ای نامعلوم،‌
                 حال تنها چیزی است که ما در دست داریم پس چه بهتر که این حال زیبا شود. <Aknoon />{" "}

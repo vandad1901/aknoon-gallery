@@ -40,15 +40,15 @@ export default async function Page({ searchParams }: props) {
                     )}
                     <div
                         className={cn(
-                            "grid min-h-[14rem] w-full grid-cols-2 gap-[2px] sm:grid-cols-3 md:min-h-[22rem] md:gap-2 xl:grid-cols-4",
+                            "grid min-h-56 w-full grid-cols-2 gap-0.5 sm:grid-cols-3 md:min-h-88 md:gap-2 xl:grid-cols-4",
                             artworks.length === 0 &&
-                                "[&>*:nth-child(n+5)]:hidden sm:[&>*:nth-child(n+5)]:flex sm:[&>*:nth-child(n+7)]:hidden xl:[&>*:nth-child(n+7)]:flex xl:[&>*:nth-child(n+9)]:hidden",
+                            "[&>*:nth-child(n+5)]:hidden sm:[&>*:nth-child(n+5)]:flex sm:[&>*:nth-child(n+7)]:hidden xl:[&>*:nth-child(n+7)]:flex xl:[&>*:nth-child(n+9)]:hidden",
                         )}>
                         {artworks.length !== 0
                             ? artworks.map((a) => <ArtworkCard key={a.ID} artwork={a} />)
                             : Array.from({ length: 12 }).map((_, i) => (
-                                  <ArtworkCardSkeleton key={i} />
-                              ))}
+                                <ArtworkCardSkeleton key={i} />
+                            ))}
                     </div>
                     <ArtworksPagination
                         currentPage={currentPage}
@@ -65,7 +65,7 @@ type ArtworkCardProps = { artwork: Artwork };
 
 function ArtworkCard({ artwork }: ArtworkCardProps) {
     return (
-        <div className="flex h-[14rem] w-full flex-col gap-2 p-2 outline outline-2 outline-border md:h-[22rem] md:rounded-xl md:border-2 md:outline-0">
+        <div className="flex h-56 w-full flex-col gap-2 p-2 outline-solid outline-2 outline-border md:h-88 md:rounded-xl md:border-2 md:outline-0">
             <div className="flex items-center justify-center ">
                 <Image
                     src={placeholder}
@@ -73,7 +73,7 @@ function ArtworkCard({ artwork }: ArtworkCardProps) {
                     className="h-32 w-32 object-contain md:h-64 md:w-64"
                 />
             </div>
-            <div className="flex flex-grow flex-col justify-between">
+            <div className="flex grow flex-col justify-between">
                 <p className="line-clamp-2 max-w-full text-ellipsis text-sm md:text-base">
                     {artwork.name}
                     {artwork.model && ` - ${artwork.model}`}
@@ -88,13 +88,13 @@ function ArtworkCard({ artwork }: ArtworkCardProps) {
 
 function ArtworkCardSkeleton() {
     return (
-        <div className="flex h-[14rem] w-full flex-col gap-2 p-2 outline outline-2 outline-border md:h-[22rem] md:rounded-xl md:border-2 md:outline-0">
+        <div className="flex h-56 w-full flex-col gap-2 p-2 outline-solid outline-2 outline-border md:h-88 md:rounded-xl md:border-2 md:outline-0">
             <div className="flex items-center justify-center">
                 <div className="h-32 w-32 object-contain p-2 md:h-64 md:w-64">
                     <Skeleton className="h-full w-full"></Skeleton>
                 </div>
             </div>
-            <div className="flex flex-grow flex-col justify-between">
+            <div className="flex grow flex-col justify-between">
                 <Skeleton className="h-5 w-3/4 rounded-lg"></Skeleton>
                 <Skeleton className="h-5 w-2/5 rounded-lg"></Skeleton>
             </div>

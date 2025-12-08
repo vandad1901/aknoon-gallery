@@ -126,7 +126,7 @@ function Filter({ column, table }: { column: Column<any, unknown>; table: TanTab
                             ? `(${column.getFacetedMinMaxValues()?.[0]})`
                             : ""
                     }`}
-                    className="w-32 rounded border shadow"
+                    className="w-32 rounded border shadow-sm"
                 />
                 <DebouncedInput
                     type="number"
@@ -141,7 +141,7 @@ function Filter({ column, table }: { column: Column<any, unknown>; table: TanTab
                             ? `(${column.getFacetedMinMaxValues()?.[1]})`
                             : ""
                     }`}
-                    className="w-32 rounded border shadow"
+                    className="w-32 rounded border shadow-sm"
                 />
             </div>
         </div>
@@ -157,7 +157,7 @@ function Filter({ column, table }: { column: Column<any, unknown>; table: TanTab
                 value={(columnFilterValue ?? "") as string}
                 onChange={(value) => column.setFilterValue(value)}
                 placeholder={`${column.columnDef.header} (${column.getFacetedUniqueValues().size})`}
-                className="min-w-[8rem] rounded border shadow"
+                className="min-w-32 rounded border shadow-sm"
                 list={column.id + "list"}
             />
         </>

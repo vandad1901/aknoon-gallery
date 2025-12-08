@@ -21,36 +21,36 @@ export default function Footer() {
                             href="https://www.instagram.com/aknoongallery/"
                             className="grid grid-cols-[2rem_1fr] gap-1">
                             <Image alt="لوگوی اینستاگرام" src={InstaLogo} />
-                            <p className="m-[0.125rem]">aknoongallery</p>
+                            <p className="m-0.5">aknoongallery</p>
                         </Link>
                         <Link
                             href="https://www.instagram.com/aknoongallery.jewelry/"
                             className="grid grid-cols-[2rem_1fr] gap-1">
                             <Image alt="لوگوی اینستاگرام" src={InstaLogo} />
-                            <p className="m-[0.125rem]">aknoongallery.jewelry</p>
+                            <p className="m-0.5">aknoongallery.jewelry</p>
                         </Link>
                         <Link
                             href="https://www.instagram.com/aknoongallery.style/"
                             className="grid grid-cols-[2rem_1fr] gap-1">
                             <Image alt="لوگوی اینستاگرام" src={InstaLogo} />
-                            <p className="m-[0.125rem]">aknoongallery.style</p>
+                            <p className="m-0.5">aknoongallery.style</p>
                         </Link>
                         <Link href="tel:02188068652" className="grid grid-cols-[2rem_1fr] gap-1">
                             <Image alt="عکس یک تلفن" src={telephoneIcon} />
-                            <p className="m-[0.125rem]">02188068652</p>
+                            <p className="m-0.5">02188068652</p>
                         </Link>
 
                         <Link
                             href="https://wa.me/+989203193849/"
                             className="grid grid-cols-[2rem_1fr] gap-1">
                             <Image alt="لوگوی واتسپ" src={whatsappLogo} />
-                            <p className="m-[0.125rem]">Aknoon Gallery</p>
+                            <p className="m-0.5">Aknoon Gallery</p>
                         </Link>
                         <Link
                             href="https://t.me/+989203193849/"
                             className="grid grid-cols-[2rem_1fr] gap-1">
                             <Image alt="لوگوی تلگرام" src={TgLogo} />
-                            <p className="m-[0.125rem]">Aknoon Gallery</p>
+                            <p className="m-0.5">Aknoon Gallery</p>
                         </Link>
                     </div>
                     <Link

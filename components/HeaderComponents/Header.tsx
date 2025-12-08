@@ -29,9 +29,9 @@ export default async function Header() {
                     icon={true}
                     type="search"
                     placeholder="جستجوی محصولات"
-                    className="hidden w-1/3 min-w-[16rem] max-w-md outline-none sm:flex"
+                    className="hidden w-1/3 min-w-[16rem] max-w-md outline-hidden sm:flex"
                 />
-                <div className="flex-grow"></div>
+                <div className="grow"></div>
                 <Button
                     variant="ghost"
                     className="h-8 w-8 rounded-md border-2 p-1 focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 sm:hidden">

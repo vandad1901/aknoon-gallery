@@ -4,7 +4,7 @@ export default function page() {
     return (
         <main className="m-4 grid h-full grid-cols-1 justify-items-center gap-4 md:m-6 md:grid-cols-2">
             <p
-                className="text-md max-w-[60ch] hyphens-auto break-words rounded-lg border-dotted text-justify md:justify-self-start md:text-right"
+                className="text-md max-w-[60ch] hyphens-auto wrap-break-word rounded-lg border-dotted text-justify md:justify-self-start md:text-right"
                 lang="fa">
                 گالری <strong className="text-aknoon">اکنون </strong>
                 از سال ۱۳۹۳ تلاش کرده‌است، بین آفرینشگران آثار هنری و علاقمندان
@@ -25,7 +25,7 @@ export default function page() {
             </p>
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d680.7597940734876!2d51.40490847587094!3d35.744473659596785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1701599979429!5m2!1sen!2s"
-                className="aspect-[4/3] w-[80%] rounded-md border-2 border-aknoon md:h-full md:w-auto md:max-w-full md:justify-self-end"
+                className="aspect-4/3 w-[80%] rounded-md border-2 border-aknoon md:h-full md:w-auto md:max-w-full md:justify-self-end"
                 allowFullScreen={false}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"></iframe>

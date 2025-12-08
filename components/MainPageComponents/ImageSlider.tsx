@@ -11,7 +11,7 @@ import mobileSlider3 from "@/public/Sliders/mobile_slider_3.jpg";
 export default function ImageSlider() {
     return (
         <div className="h-[500px] md:h-[400px] w-full overflow-hidden bg-aknoon ">
-            <div className="relative left-0 grid h-full w-[100vw] animate-slideShow grid-cols-3 justify-items-center transition-all">
+            <div className="relative left-0 grid h-full w-screen animate-slide-show grid-cols-3 justify-items-center transition-all">
                 <Image
                     src={desktopSlider1}
                     alt="placeholder"

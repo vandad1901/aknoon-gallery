@@ -29,7 +29,7 @@ const styleCats: [nameLink, nameLink[]][] = [
         [
             ["گوشواره", "earings"],
             ["گردنبند", "necklace"],
-            ["انگشتر", "ring"],
+            ["انگشتر", "ring-3"],
             ["گیره مو", "hairclip"],
             ["دکمه سردست", "cufflinks"],
             ["النگو و دستبند", "bracelet"],

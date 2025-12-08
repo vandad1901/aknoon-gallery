@@ -101,7 +101,7 @@ export default function NavigationItems() {
             </NavigationMenuList>
             <NavigationMenuViewport
                 dir="rtl"
-                className="left-0 right-0 top-full mx-auto box-content h-80 w-[40rem] border-2 bg-white shadow-sm"
+                className="left-0 right-0 top-full mx-auto box-content h-80 w-160 border-2 bg-white shadow-xs"
             />
         </NavigationMenu>
     );
